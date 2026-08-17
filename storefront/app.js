@@ -363,7 +363,7 @@ function fillNav() {
 
   document.querySelectorAll("[data-drawer-nav]").forEach((nav) => {
     nav.innerHTML =
-      `<a href="shop.html">All products<small>${CAT.products.length} in the catalog</small></a>` +
+      `<a href="shop.html">View all categories<small>${CAT.cats.length} categories · ${CAT.products.length} products</small></a>` +
       CAT.cats.map((c) =>
         `<a href="shop.html?cat=${c.slug}">${esc(c.name)}<small>${c.count} products · from ${money(c.from)}</small></a>`).join("") +
       `<a href="/contact-us">Customer support</a>`;
