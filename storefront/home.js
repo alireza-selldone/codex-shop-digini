@@ -27,6 +27,7 @@ const CAMPAIGNS = [
     alt: "Modern performance desk with a laptop and monitor",
     kicker: "Work smarter",
     title: "Build your best setup.",
+    titleLines: ["Build your", "best setup."],
     lede: "Powerful everyday technology, selected to work beautifully together.",
     label: "Shop computers",
     href: "shop.html?cat=laptop",
@@ -36,6 +37,7 @@ const CAMPAIGNS = [
     alt: "Professional camera and audio tools for creators",
     kicker: "Create with clarity",
     title: "Make every idea sound and look better.",
+    titleLines: ["Make every idea", "sound and look better."],
     lede: "Cameras, microphones, and audio essentials for your next project.",
     label: "Shop creator gear",
     href: "shop.html?cat=digital-camera",
@@ -45,6 +47,7 @@ const CAMPAIGNS = [
     alt: "Portable power equipment in an outdoor setting",
     kicker: "Ready anywhere",
     title: "Dependable power that travels.",
+    titleLines: ["Dependable power", "that travels."],
     lede: "Stay connected on the road, at camp, or when the lights go out.",
     label: "Shop portable power",
     href: "shop.html?cat=rv",
@@ -68,7 +71,7 @@ function initCampaigns() {
     image.src = item.image;
     image.alt = item.alt;
     kicker.textContent = item.kicker;
-    title.textContent = item.title;
+    title.innerHTML = item.titleLines.map((line) => `<span>${esc(line)}</span>`).join("");
     lede.textContent = item.lede;
     link.textContent = item.label;
     link.href = item.href;

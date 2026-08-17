@@ -1538,7 +1538,8 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 .campaign-hero__inner{position:relative;z-index:2;width:100%;display:flex;align-items:center;min-height:inherit;}
 .campaign-hero__copy{width:min(520px,47vw);padding:42px;border-radius:16px;background:var(--theme-hero-overlay);box-shadow:0 24px 60px rgba(0,0,0,.24);}
 .campaign-hero__copy .eyebrow{color:var(--theme-light);margin-bottom:14px;}
-.campaign-hero__copy h1{font-size:clamp(42px,5.4vw,76px);line-height:.98;margin:0 0 22px;}
+.campaign-hero__copy h1{font-size:clamp(36px,3vw,42px);line-height:1.04;margin:0 0 22px;}
+.campaign-hero__copy h1 span{display:block;white-space:nowrap;}
 .campaign-hero__copy>p:not(.eyebrow){font-size:18px;line-height:1.55;color:#D9E6F8;margin:0;max-width:43ch;}
 .campaign-hero__actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px;}
 .campaign-hero__actions .btn{width:100%;min-width:0;justify-content:center;text-align:center;}
@@ -1725,7 +1726,7 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
   .digini-logo,.logo{font-size:23px;}
   .hdr__act{gap:2px;}
   .campaign-hero{min-height:620px;}
-  .campaign-hero__copy h1{font-size:39px;}
+  .campaign-hero__copy h1{font-size:clamp(25px,7.4vw,34px);}
   .campaign-hero__copy>p:not(.eyebrow){font-size:15px;}
   .campaign-hero__actions{grid-template-columns:1fr;}
   .benefit-bar__grid{grid-template-columns:1fr;}.benefit-bar__grid>div{border-right:0;border-bottom:1px solid var(--rule);}
