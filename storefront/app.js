@@ -87,11 +87,11 @@ async function fillBrandCopy() {
 
 /* ---------- Theme picker ---------- */
 const DIGINI_THEMES = [
-  { id: "blue", label: "Ocean blue", swatch: "#005BD4" },
-  { id: "violet", label: "Electric violet", swatch: "#6D28D9" },
-  { id: "emerald", label: "Emerald green", swatch: "#047857" },
-  { id: "amber", label: "Warm amber", swatch: "#B45309" },
-  { id: "rose", label: "Modern rose", swatch: "#BE123C" },
+  { id: "blue", name: "Ocean", description: "Deep blue and bright red", swatch: "#005BD4" },
+  { id: "violet", name: "Violet", description: "Electric purple and pink", swatch: "#6D28D9" },
+  { id: "emerald", name: "Emerald", description: "Modern green and orange", swatch: "#047857" },
+  { id: "amber", name: "Amber", description: "Warm ochre and clear blue", swatch: "#B45309" },
+  { id: "rose", name: "Rose", description: "Deep rose and muted teal", swatch: "#BE123C" },
 ];
 
 function initThemePicker() {
@@ -108,9 +108,16 @@ function initThemePicker() {
 
   const applyTheme = (theme, persist = true) => {
     const nextTheme = themeIds.has(theme) ? theme : "blue";
+    const themeDetails = DIGINI_THEMES.find(({ id }) => id === nextTheme);
     document.documentElement.dataset.theme = nextTheme;
     document.querySelectorAll("[data-theme-option]").forEach((button) => {
-      button.setAttribute("aria-pressed", String(button.dataset.themeOption === nextTheme));
+      button.setAttribute("aria-checked", String(button.dataset.themeOption === nextTheme));
+    });
+    document.querySelectorAll("[data-theme-current]").forEach((label) => {
+      label.textContent = themeDetails.name;
+    });
+    document.querySelectorAll("[data-theme-trigger]").forEach((trigger) => {
+      trigger.style.setProperty("--swatch", themeDetails.swatch);
     });
     if (persist) {
       try { localStorage.setItem(storageKey, nextTheme); } catch { /* no-op */ }
@@ -122,14 +129,49 @@ function initThemePicker() {
     const picker = document.createElement("span");
     picker.className = "theme-picker";
     picker.dataset.themePicker = "";
-    picker.setAttribute("role", "group");
-    picker.setAttribute("aria-label", "Choose theme color");
-    picker.innerHTML = DIGINI_THEMES.map(({ id, label, swatch }) =>
-      `<button class="theme-picker__option" type="button" data-theme-option="${id}" aria-label="${label}" aria-pressed="false" title="${label}" style="--swatch:${swatch}"></button>`
-    ).join("");
+    picker.innerHTML = `<button class="theme-picker__trigger" type="button" data-theme-trigger aria-haspopup="menu" aria-expanded="false">
+      <span class="theme-picker__swatch" aria-hidden="true"></span>
+      <span data-theme-current>Ocean</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+    </button>
+    <span class="theme-picker__menu" data-theme-menu role="menu" aria-label="Colour theme" hidden>
+      <span class="theme-picker__title">Colour theme</span>
+      ${DIGINI_THEMES.map(({ id, name, description, swatch }) =>
+        `<button class="theme-picker__item" type="button" role="menuitemradio" data-theme-option="${id}" aria-checked="false" style="--swatch:${swatch}">
+          <span class="theme-picker__swatch" aria-hidden="true"></span>
+          <span><strong>${name}</strong><small>${description}</small></span>
+          <span class="theme-picker__check" aria-hidden="true">✓</span>
+        </button>`
+      ).join("")}
+    </span>`;
+    const trigger = picker.querySelector("[data-theme-trigger]");
+    const menu = picker.querySelector("[data-theme-menu]");
+    const closeMenu = (restoreFocus = false) => {
+      menu.hidden = true;
+      trigger.setAttribute("aria-expanded", "false");
+      if (restoreFocus) trigger.focus();
+    };
+    trigger.addEventListener("click", () => {
+      const willOpen = menu.hidden;
+      menu.hidden = !willOpen;
+      trigger.setAttribute("aria-expanded", String(willOpen));
+      if (willOpen) menu.querySelector('[aria-checked="true"]')?.focus();
+    });
     picker.addEventListener("click", (event) => {
       const option = event.target.closest("[data-theme-option]");
-      if (option) applyTheme(option.dataset.themeOption);
+      if (option) {
+        applyTheme(option.dataset.themeOption);
+        closeMenu(true);
+      }
+    });
+    document.addEventListener("click", (event) => {
+      if (!picker.contains(event.target)) closeMenu();
+    });
+    picker.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !menu.hidden) {
+        event.preventDefault();
+        closeMenu(true);
+      }
     });
     bar.append(picker);
   });

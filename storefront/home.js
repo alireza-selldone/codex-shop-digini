@@ -97,8 +97,9 @@ function fillHome(catalog) {
   const categorySection = grid?.closest("section");
   if (categorySection) categorySection.hidden = catalog.cats.length === 0;
   if (grid) {
-    grid.dataset.n = String(catalog.cats.length);
-    grid.innerHTML = catalog.cats.map((category) => {
+    const featuredCategories = catalog.cats.slice(0, 6);
+    grid.dataset.n = String(featuredCategories.length);
+    grid.innerHTML = featuredCategories.map((category) => {
       const art = CATEGORY_ART[ids.get(category.slug)];
       return `<a class="cat digini-cat" href="shop.html?cat=${encodeURIComponent(category.slug)}">
         <span class="digini-cat__art"><img src="${art ? `assets/categories/${art}` : category.image}" alt="${esc(category.name)}" loading="lazy" width="500" height="500"></span>
