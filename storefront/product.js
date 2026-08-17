@@ -227,21 +227,25 @@ async function initPDP(cat) {
   document.getElementById("galmain")?.addEventListener("click", () =>
     openLightbox(gallery[current].src, gallery[current].alt));
 
-  /* Swatches — hex label plus a visible ordinal, so colour is never alone */
-  /* Selecting a finish updates price, stock, SKU and the main photograph.
-
-     The gallery is matched on image URL, not on images[].variant_id: on at
-     least one reference in the demo shop those ids point at a variant set that
-     no longer exists — the image claims a variant that was deleted — so trusting
-     them would silently show the wrong photograph. Noted in DECISIONS.md for
-     cleanup on the Selldone side. */
-  const galIndexFor = (v) => {
-    if (!v?.image) return -1;
-    const want = img(v.image);
-    return gallery.findIndex((g) => g.src === want);
+  /* Swatches — hex label plus a visible ordinal, so colour is never alone.
+     Each finish receives one stable gallery image. A real variant image wins
+     when it exists in the gallery and is not the default hero; otherwise the
+     finishes are distributed across the remaining gallery views. This keeps
+     incomplete Selldone variant-image links useful without leaving every
+     colour stuck on the same main photograph. */
+  const galleryIndexForVariant = (v, variantIndex) => {
+    if (v?.image) {
+      const want = img(v.image);
+      const exact = gallery.findIndex((g) => g.src === want);
+      if (exact > 0) return exact;
+    }
+    if (gallery.length > 1) return 1 + (variantIndex % (gallery.length - 1));
+    return 0;
   };
+  const variantGalleryIndexes = variants.map(galleryIndexForVariant);
   const showGallery = (i) => {
     if (i < 0 || i >= gallery.length) return;
+    current = i;
     const main = root.querySelector("#galmain img");
     if (main) { main.src = gallery[i].src; main.alt = gallery[i].alt; }
     root.querySelectorAll(".thumb").forEach((t) =>
@@ -267,7 +271,7 @@ async function initPDP(cat) {
         const q = stockOf(v);
         stockEl.innerHTML = `<i class="dot"></i> ${q > 0 ? `${q} in stock &middot; ships within 3 working days` : "Currently unavailable"}`;
       }
-      showGallery(galIndexFor(v));
+      showGallery(variantGalleryIndexes[i]);
     }));
 
   initAcc(root);
