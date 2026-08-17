@@ -531,6 +531,7 @@ html.is-locked,html.is-locked body{overflow:hidden;height:100%;}
 .price-field input::-webkit-inner-spin-button,.price-field input::-webkit-outer-spin-button{margin:0;appearance:none;-webkit-appearance:none;}
 .price-field input[type=number]{appearance:textfield;-moz-appearance:textfield;}
 .listhd{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:28px;flex-wrap:wrap;}
+.list-controls{display:flex;align-items:center;gap:10px;}
 .sort{border:1px solid var(--rule);background:var(--dial-pure);height:var(--tap);padding:0 14px;border-radius:var(--radius);font-size:13px;}
 .crumb{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mist-text);margin-bottom:6px;}
 .crumb a{display:inline-flex;align-items:center;min-height:var(--tap);min-width:var(--tap);}
@@ -546,9 +547,9 @@ html.is-locked,html.is-locked body{overflow:hidden;height:100%;}
   }
   .filters.is-open{transform:none;}
   .fbar{
-    display:flex;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;
-    background:var(--graphite);color:var(--dial);height:48px;padding:0 26px;align-items:center;
-    border-radius:24px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    display:flex;position:static;transform:none;z-index:auto;
+    background:var(--graphite);color:var(--dial);height:var(--tap);padding:0 18px;align-items:center;justify-content:center;
+    border-radius:8px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
   }
 }
 
@@ -1730,6 +1731,17 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
   .digini-cats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
   .digini-cat{height:235px!important;}.digini-cat__copy{padding:10px 12px;}.digini-cat__copy b{font-size:14px;}
   .promo-grid,.guide-grid{grid-template-columns:1fr;}.promo-card--wide{grid-column:auto;}.promo-card{min-height:330px;}
+  .shop .listhd{gap:14px;margin-bottom:18px;}
+  .shop .listhd>div:first-child{width:100%;}
+  .shop .list-controls{width:100%;}
+  .shop .list-controls>*{flex:1 1 0;min-width:0;}
+  .shop .pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+  .shop .pcard{padding:10px;display:flex;flex-direction:column;}
+  .shop .pcard__art{margin-bottom:10px;}
+  .shop .pcard .eyebrow{font-size:8px;line-height:1.35;}
+  .shop .pcard__name{font-size:13px;line-height:1.3;margin:4px 0 8px;}
+  .shop .pcard .price{font-size:13px;margin-top:auto;}
+  .shop .sk-product-card{padding:10px;gap:9px;}
   .pinfo{padding:20px 18px;}
   .pinfo .h1{font-size:32px;}
   .reviews-summary{align-items:flex-start;flex-direction:column;}
