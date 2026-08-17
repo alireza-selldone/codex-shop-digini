@@ -17,7 +17,6 @@ A person reads every message. Most are answered within one working day.
 The best way to reach us. Written questions get written answers you can refer back to.
 
 **Phone** — {{SHOP_PHONE}}
-{{OPENING_HOURS}}
 
 **Post** — {{SHOP_ADDRESS}}
 

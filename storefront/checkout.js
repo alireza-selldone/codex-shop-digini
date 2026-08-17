@@ -1,4 +1,4 @@
-/* Watchino — checkout.
+/* Digini — checkout.
    Five steps, validation on blur only, sticky summary from the live bag.
    This is a demonstration storefront: nothing is written to the shop and no
    order is placed. The physical basket path is documented inline so the real
@@ -81,7 +81,7 @@ function renderSummary() {
   const lines = bagLines(CAT);
   const rows = $("#sumrows");
   if (!lines.length) {
-    rows.innerHTML = `<p class="cap" style="padding:12px 0">Your bag is empty. <a href="shop.html" style="text-decoration:underline">Browse the collection</a>.</p>`;
+    rows.innerHTML = `<p class="cap" style="padding:12px 0">Your bag is empty. <a href="shop.html" style="text-decoration:underline">Browse products</a>.</p>`;
     $("#sumtotals").hidden = true;
     $("#next").disabled = true;
     return;
@@ -153,7 +153,7 @@ async function init() {
     </label>`).join("") + `
     <label class="opt">
       <input type="radio" name="pay" value="transfer" data-label="Bank transfer">
-      <span><b>Bank transfer</b><br><span class="cap">Watch ships once funds clear</span></span>
+      <span><b>Bank transfer</b><br><span class="cap">Order ships once funds clear</span></span>
     </label>`;
 
   const note = $("#gatewaynote");

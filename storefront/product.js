@@ -1,4 +1,4 @@
-/* Watchino — product detail. Works for every reference via ?id=.
+/* Digini — product detail. Works for every product via ?id=.
    Ported from design-reference initPDP(), with three corrections agreed with
    the client: real finishes only, real spec data instead of invented calibers,
    and a reviews block driven by real rating data. */
@@ -49,12 +49,12 @@ function ratingBlock(p) {
         <p class="cap mb0">No ratings recorded yet</p>
       </div>
       <div class="rateempty">
-        <p class="h3">This reference has not been rated</p>
+        <p class="h3">This product has not been rated</p>
         <p class="cap mb0" style="max-width:38ch">Ratings appear here once verified owners submit them through Selldone. Nothing has been published for REF. ${p.id}.</p>
       </div>
       <div>
         <p class="lede" style="margin-bottom:16px">Every movement is opened, timed on six positions and certified by the workshop before dispatch, whether or not anyone has written about it.</p>
-        <p class="ref mb0">Watchino workshop</p>
+        <p class="ref mb0">Digini catalog</p>
       </div>
     </div>`;
   }
@@ -74,7 +74,7 @@ function ratingBlock(p) {
       <p class="cap mb0">Aggregated by Selldone from verified purchases.</p>
     </div>
     <div>
-      <p class="lede" style="margin-bottom:16px">Individual written reviews are not published for this reference.</p>
+      <p class="lede" style="margin-bottom:16px">Individual written reviews are not published for this product.</p>
       <p class="ref mb0">REF. ${p.id}</p>
     </div>
   </div>`;
@@ -89,14 +89,14 @@ async function initPDP(cat) {
 
   if (!p) {
     root.innerHTML = `<div class="notfound">
-      <p class="h1" style="margin-bottom:14px">No such reference</p>
-      <p class="lede" style="margin:0 auto 28px">${id ? `REF. ${esc(id)} is not in the collection.` : "No reference was requested."}</p>
-      <a class="btn" href="shop.html">Browse all references</a></div>`;
-    document.title = "Reference not found — Watchino";
+      <p class="h1" style="margin-bottom:14px">Product not found</p>
+      <p class="lede" style="margin:0 auto 28px">${id ? `Product ${esc(id)} is not in the catalog.` : "No product was requested."}</p>
+      <a class="btn" href="shop.html">Browse all products</a></div>`;
+    document.title = "Product not found — Digini";
     return;
   }
 
-  document.title = `${p.name} — Watchino`;
+  document.title = `${p.name} — Digini`;
   const c = catOf(cat, p.cat);
   const others = cat.products.filter((x) => x.cat === p.cat && x.id !== p.id);
 
@@ -106,7 +106,7 @@ async function initPDP(cat) {
     const detail = await loadProduct(p.id);
     if (detail.gallery.length) gallery = detail.gallery;
   } catch (e) {
-    console.warn("[watchino] gallery fallback to icon", e);
+    console.warn("[digini] gallery fallback to icon", e);
   }
 
   /* Every variant the shop defines, not a filtered subset. */
@@ -161,7 +161,7 @@ async function initPDP(cat) {
       <p class="swpos" data-sw-pos>Finish 1 of ${variants.length}</p>
       ` : `
       <p class="eyebrow mb0" style="margin-bottom:8px">Case &amp; strap</p>
-      <p class="cap" style="margin-bottom:4px">A single finish is recorded for this reference.</p>
+      <p class="cap" style="margin-bottom:4px">A single option is recorded for this product.</p>
       `}
 
       <p class="stock" data-stock><i class="dot"></i> ${(showSwatches ? stockOf(variants[0]) : p.qty) > 0 ? `${showSwatches ? stockOf(variants[0]) : p.qty} in stock &middot; ships within 3 working days` : "Currently unavailable"}</p>
@@ -177,7 +177,7 @@ async function initPDP(cat) {
           <button class="acc__hd" type="button" aria-expanded="true">Description <span class="acc__ico">–</span></button>
           <div class="acc__bd">
             <p class="mt0">${esc(cat.cats.find((c) => c.slug === p.cat)?.blurb || "")}</p>
-            <p class="cap mb0">Collection description. Selldone holds no per-reference description for this product.</p>
+            <p class="cap mb0">Category description. Selldone holds no separate long description for this product.</p>
           </div>
         </div>
         <div class="acc">
@@ -185,13 +185,13 @@ async function initPDP(cat) {
           <div class="acc__bd">
             ${rows.length ? `<table class="spectable"><tbody>
               ${rows.map(([k, v]) => `<tr><th scope="row">${esc(k)}</th><td>${esc(v)}</td></tr>`).join("")}
-              <tr><th scope="row">Reference</th><td>${p.id}</td></tr>
+              <tr><th scope="row">Product ID</th><td>${p.id}</td></tr>
             </tbody></table>` : `<p class="mt0 mb0">No specifications are recorded for REF. ${p.id}.</p>`}
           </div>
         </div>
         <div class="acc">
           <button class="acc__hd" type="button" aria-expanded="false">Shipping &amp; returns <span class="acc__ico">+</span></button>
-          <div class="acc__bd"><p class="mt0 mb0">Insured courier, signature required. Returns accepted within 30 days provided seals are intact.</p></div>
+          <div class="acc__bd"><p class="mt0 mb0">Shipping options appear at checkout. Returns are accepted within 30 days when the product remains eligible under the store policy.</p></div>
         </div>
         <div class="acc" style="border-bottom:1px solid var(--rule)">
           <button class="acc__hd" type="button" aria-expanded="false">Authentication <span class="acc__ico">+</span></button>
@@ -207,7 +207,7 @@ async function initPDP(cat) {
 
   /* Related */
   const rt = document.getElementById("reltitle");
-  if (rt) rt.textContent = others.length ? `Also in ${c.name}` : "Elsewhere in the collection";
+  if (rt) rt.textContent = others.length ? `More in ${c.name}` : "Explore the catalog";
   const rel = document.getElementById("related");
   if (rel) rel.innerHTML = (others.length ? others : cat.products.filter((x) => x.id !== p.id))
     .slice(0, 3).map(cardHTML).join("");

@@ -11,19 +11,19 @@
 
 ## Who we are
 
-{{SHOP_NAME}} is an online store built around a simple idea: sell fewer things, know them better, and stand behind every one of them.
+{{SHOP_NAME}} is an online electronics store built around a simple idea: make useful technology easier to understand, compare, and choose.
 
-We started in {{FOUNDED_YEAR}} and we still work the same way. Every item in our catalogue is chosen by a person, not a purchasing algorithm. If we would not use it ourselves or recommend it to someone we know, it does not go on the shelf.
+Every item in our catalogue is selected for a clear everyday purpose. We organize products around the way people work, create, travel, listen, and stay connected, so the important differences are easier to see.
 
 ## How we choose what we sell
 
 Three questions decide whether something makes it into the catalogue.
 
-**Is it well made?** We look at materials, construction and how a product holds up after months of use rather than how it photographs on day one.
+**Is it fit for purpose?** We look at practical specifications, compatibility, construction, and the jobs a product is designed to handle.
 
 **Is it honestly priced?** We would rather carry one good option at a fair price than four variations designed to make a fifth look reasonable.
 
-**Can we support it?** If we cannot answer questions about a product, source a replacement part, or handle a return without an argument, we do not list it.
+**Is the choice clear?** Categories, specifications, and buying guides should help customers compare products without decoding unnecessary jargon.
 
 ## What you can expect from us
 

@@ -3,18 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Watchino — Fine Watches</title>
-    <meta
-      name="description"
-      content="Watchino storefront: men's classic, women's collection, heritage &amp; leather, sport &amp; chronograph, diamond &amp; gold, and haute horlogerie timepieces."
-    />
-    <meta name="shop-name" content="Watchino" />
+    <title>Digini — Technology for Every Day</title>
+    <meta name="description" content="Shop laptops, cameras, audio, storage, displays, and portable power at Digini." />
+    <meta name="shop-name" content="Digini" />
     <meta name="pajulina-app-name" content="Selldone Shop A1" />
     <meta name="pajulina-client-id" content="019ff544-c6a2-73fa-b47c-75e4254fda53" />
-    <meta name="pajulina-shop-id" content="8460" />
-    <meta name="pajulina-shop-name" content="Watchino" />
-    <meta name="pajulina-shop-domain" content="watchino.myselldone.com" />
-    <meta name="pajulina-storefront-shop-handle" content="Watchino" />
+    <meta name="pajulina-shop-id" content="15549" />
+    <meta name="pajulina-shop-name" content="Digini" />
+    <meta name="pajulina-shop-domain" content="digini-hZGabLru.myselldone.com" />
+    <meta name="pajulina-storefront-shop-handle" content="digini-hZGabLru" />
     <meta name="pajulina-dashboard-path" content="/dashboard/" />
     <meta name="pajulina-callback-path" content="/callback/" />
     <meta name="pajulina-selldone-base" content="https://selldone.com" />
@@ -29,365 +26,67 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.selldone.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Azeret+Mono:wght@500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <script type="module" src="app.js"></script>
     <script type="module" src="home.js"></script>
   </head>
   <body>
-
     <a class="skip" href="#main">Skip to content</a>
+    <div class="page digini-page">
+      <div class="sdbar"><p class="sdbar__in"><span class="sdbar__hx" aria-hidden="true">♥</span> Made with <a href="https://selldone.com" rel="noopener">Selldone</a></p></div>
 
-    <!-- Signature: chapter-ring index rail, doubles as scroll position -->
-    <aside class="rail" aria-hidden="true">
-      <span class="rail__label">WATCHINO</span>
-      <div class="rail__ticks"><span class="rail__marker"></span></div>
-      <span class="rail__label" data-brand-est></span>
-    </aside>
-
-    <div class="page">
-      <!-- Platform credit. Sits above the shop's own announcement bar and is
-           deliberately light: the announcement bar is dark, and two dark bars
-           stacked read as one heavy block. Outside the sticky header, so the
-           stuck-header height the sticky offsets depend on is unchanged. -->
-      <div class="sdbar">
-        <p class="sdbar__in"><span class="sdbar__hx" aria-hidden="true">&#9829;</span> Made with <a href="https://selldone.com" rel="noopener">Selldone</a></p>
-      </div>
-
-      <header class="hdr">
-        <div class="topbar">
-          <span class="topbar__long" data-announce-long>Insured worldwide delivery · Every reference authenticated in-house</span>
-          <span class="topbar__short" data-announce-short>Insured delivery · Authenticated in-house</span>
-        </div>
+      <header class="hdr digini-header">
+        <div class="topbar"><span class="topbar__long" data-announce-long>Curated electronics · Secure checkout · Helpful buying guides</span><span class="topbar__short" data-announce-short>Curated tech · Secure checkout</span></div>
         <div class="wrap hdr__in">
-          <div class="hdr__nav">
-            <nav class="nav" aria-label="Main">
-              <a href="shop.html">Collections</a>
-              <a href="shop.html?cat=haute-horlogerie">Haute Horlogerie</a>
-              <a href="/blog">Journal</a>
-              <a href="#service">Client Care</a>
-            </nav>
-            <div class="mega"><div class="mega__grid" id="megagrid"></div></div>
-          </div>
-          <button class="burger mobonly" data-open="nav" aria-label="Open menu"><span></span></button>
-          <a class="logo" href="index.html">Watch<span>i</span>no</a>
+          <button class="burger mobonly" type="button" data-open="nav" aria-label="Open menu"><span></span></button>
+          <a class="logo digini-logo" href="index.html" aria-label="Digini home">DIGI<span>NI</span></a>
+          <button class="header-search" type="button" data-open="search" aria-label="Search products"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg><span>Search products, categories, and brands</span></button>
           <div class="hdr__act">
-            <button class="iconbtn" type="button" data-open="search" aria-label="Search">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
-            </button>
-            <button class="iconbtn" type="button" data-open="account" aria-label="Account">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
-            </button>
-            <button class="iconbtn" data-open="cart" aria-label="Open bag, 0 items">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-              <span class="cartdot" data-cart-count hidden>0</span>
-            </button>
+            <button class="iconbtn" type="button" data-open="account" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
+            <button class="iconbtn" type="button" data-open="cart" aria-label="Open bag, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartdot" data-cart-count hidden>0</span></button>
           </div>
         </div>
+        <div class="digini-navrow"><div class="wrap"><nav class="nav" aria-label="Main"><a href="shop.html"><b>Shop All</b></a><a href="shop.html?cat=laptop">Computers</a><a href="shop.html?cat=monitors">Displays</a><a href="shop.html?cat=digital-camera">Cameras</a><a href="shop.html?cat=headphones">Audio</a><a href="shop.html?cat=hard-drive">Storage</a><a href="shop.html?cat=rv">Portable Power</a><a href="/blog">Buying Guides</a></nav><div class="mega"><div class="mega__grid" id="megagrid"></div></div></div></div>
       </header>
 
       <main id="main" tabindex="-1">
-
-        <!-- Hero. Copy describes the photograph, not the product name: the
-             linked reference is called "Skeleton" but shows a closed dial. -->
-        <!-- Hero. The photograph's left ~40% is empty by design, so the copy sits
-             there with no scrim. If a scrim ever looks necessary, the crop is wrong. -->
-        <section class="hero ink" data-hero>
-          <div class="hero__media">
-            <img data-hero-img src="" alt="" width="1672" height="941" fetchpriority="high">
-          </div>
-          <!-- Sibling of .hero__media, not a child: .hero__media carries z-index 0,
-               which opens a stacking context that would trap this layer beneath the
-               copy and swallow every click on a marker. -->
-          <div class="hero__spots" data-hero-spots hidden></div>
-          <div class="wrap hero__grid">
-            <div class="hero__copy">
-              <div class="sweep">
-                <span class="sweep__dial"><i class="sweep__hand"></i></span>
-                <span>Running seconds</span>
-              </div>
-              <p class="eyebrow eyebrow--onink">Haute Horlogerie</p>
-              <h1 class="h-hero">Nothing<br>hidden.</h1>
-              <p class="lede">Roman numerals over a guilloché dial, on hand-stitched alligator. Every reference is opened, timed on six positions and recorded before it ships.</p>
-              <div class="hero__cta">
-                <a class="btn btn--line" data-hero-link href="shop.html?cat=haute-horlogerie">View the reference</a>
-                <a class="btn btn--text" href="shop.html">All collections →</a>
-              </div>
-            </div>
-          </div>
+        <section class="hero campaign-hero" data-hero>
+          <img class="campaign-hero__image" data-hero-img src="assets/campaigns/performance-desk.png" alt="Modern performance desk with a laptop and monitor" width="1536" height="864" fetchpriority="high" />
+          <div class="wrap campaign-hero__inner"><div class="campaign-hero__copy"><p class="eyebrow" data-campaign-kicker>Work smarter</p><h1 data-campaign-title>Build your best setup.</h1><p data-campaign-lede>Powerful everyday technology, selected to work beautifully together.</p><div class="campaign-hero__actions"><a class="btn btn--primary" data-hero-link href="shop.html?cat=laptop">Shop computers</a><a class="btn btn--light" href="shop.html">Explore all products</a></div></div></div>
+          <div class="campaign-hero__dots" role="group" aria-label="Campaign slides" data-campaign-dots></div>
         </section>
 
-        <!-- Below 768 the two wrists are too far apart for a portrait crop to hold
-             both, so the hotspots are dropped and the same two references appear as
-             ordinary cards. A tap that only opens a card is worse than a card. -->
-        <section class="section--tight heromob" data-hero-mob hidden>
-          <div class="wrap">
-            <p class="eyebrow eyebrow--blued mb0">Worn above</p>
-            <h2 class="h3" style="margin:6px 0 22px">The two references in the photograph</h2>
-            <div class="pgrid" data-hero-mob-list></div>
-          </div>
-        </section>
+        <section class="benefit-bar" aria-label="Store benefits"><div class="wrap benefit-bar__grid"><div><b>Focused selection</b><span>Technology for real daily needs</span></div><div><b>Clear product details</b><span>Compare practical features quickly</span></div><div><b>Secure checkout</b><span>Powered by Selldone</span></div><div><b>Helpful guides</b><span>Make confident buying decisions</span></div></div></section>
 
-        <div class="wrap"><div class="tickrule"></div></div>
+        <section class="section category-section" id="collections"><div class="wrap"><div class="section-heading"><div><p class="eyebrow eyebrow--blued">Shop by category</p><h2>Find the right technology, faster.</h2></div><a class="text-link" href="shop.html">View all products →</a></div><p class="cap" data-catalog-error hidden></p><div class="cats digini-cats" id="catgrid"></div></div></section>
 
-        <section class="section--tight">
-          <div class="wrap">
-            <div class="assure" style="border:1px solid var(--rule);background:var(--dial-pure)">
-              <div><b>Authenticated in-house</b><span class="cap">Every movement opened and verified</span></div>
-              <div><b>Insured delivery</b><span class="cap">Fully covered, signature on receipt</span></div>
-              <div><b>Five-year coverage</b><span class="cap">International, transferable</span></div>
-              <div><b>A named specialist</b><span class="cap">One person, start to finish</span></div>
-            </div>
-            <p class="cap" data-catalog-error hidden style="margin-top:16px;color:var(--alert)"></p>
-          </div>
-        </section>
+        <section class="section promo-section"><div class="wrap promo-grid">
+          <a class="promo-card promo-card--wide" href="shop.html?cat=monitors"><img src="assets/campaigns/performance-desk.png" alt="A refined computer workspace" loading="lazy" /><span><small>Workspace refresh</small><b>Sharper screens.<br />Smarter work.</b><em>Shop displays →</em></span></a>
+          <a class="promo-card" href="shop.html?cat=microphones"><img src="assets/campaigns/creator-essentials.png" alt="Professional creator audio equipment" loading="lazy" /><span><small>Creator essentials</small><b>Sound ready.</b><em>Shop audio →</em></span></a>
+          <a class="promo-card" href="shop.html?cat=rv"><img src="assets/campaigns/portable-power.png" alt="Portable power equipment outdoors" loading="lazy" /><span><small>Power anywhere</small><b>Stay charged.</b><em>Shop power →</em></span></a>
+        </div></section>
 
-        <!-- Six collections — the heart of the page -->
-        <section class="section" id="collections">
-          <div class="wrap">
-            <p class="eyebrow eyebrow--blued reveal">Six collections</p>
-            <h2 class="h1 reveal" style="max-width:16ch;margin-bottom:44px">Sorted by what a watch is for.</h2>
-            <div class="cats reveal" id="catgrid"></div>
-          </div>
-        </section>
+        <section class="section products-section"><div class="wrap"><div class="section-heading"><div><p class="eyebrow eyebrow--blued">Trending now</p><h2>Fresh picks from Digini.</h2></div><a class="text-link" href="shop.html" data-all-refs>All products →</a></div><div class="scroller" id="arrivals"></div></div></section>
 
-        <!-- Price ladder as three deliberate registers, not a discount rack -->
-        <section>
-          <div class="tier reveal" data-tier-1>
-            <div class="tier__art"><img src="" alt="" width="600" height="600" loading="lazy"></div>
-            <div class="tier__txt">
-              <p class="eyebrow">Register one</p>
-              <h3 class="h2" style="margin-bottom:18px">The Collections</h3>
-              <p class="lede">Where most people begin. Swiss quartz and entry automatics, built to the same finishing standard as everything above them.</p>
-              <p class="tier__range" data-tier-range></p>
-              <p style="margin-top:26px"><a class="btn btn--text" href="shop.html">Browse the collections →</a></p>
-            </div>
-          </div>
+        <section class="section guide-section"><div class="wrap"><div class="section-heading"><div><p class="eyebrow eyebrow--blued">Digini guides</p><h2>Better choices start here.</h2></div><a class="text-link" href="/blog">Read all guides →</a></div><div class="guide-grid">
+          <a class="guide-card" href="/blog"><img src="assets/blog/choose-the-right-laptop.png" alt="Laptop buying guide workspace" loading="lazy" /><span><small>Computing</small><b>How to Choose the Right Laptop for Your Day</b><em>Read guide →</em></span></a>
+          <a class="guide-card" href="/blog"><img src="assets/blog/simple-backup-strategy.png" alt="External drives arranged for backup" loading="lazy" /><span><small>Storage</small><b>A Simple Backup Strategy That Actually Works</b><em>Read guide →</em></span></a>
+          <a class="guide-card" href="/blog"><img src="assets/blog/clear-home-studio.png" alt="Clear and comfortable home studio" loading="lazy" /><span><small>Audio</small><b>Build a Clear, Comfortable Home Studio</b><em>Read guide →</em></span></a>
+          <a class="guide-card" href="/blog"><img src="assets/blog/portable-power-guide.png" alt="Portable power for trips and emergencies" loading="lazy" /><span><small>Portable power</small><b>Portable Power for Travel and Emergencies</b><em>Read guide →</em></span></a>
+        </div></div></section>
 
-          <div class="tier tier--flip reveal" data-tier-2>
-            <div class="tier__art"><img src="" alt="" width="600" height="600" loading="lazy"></div>
-            <div class="tier__txt">
-              <p class="eyebrow">Register two</p>
-              <h3 class="h2" style="margin-bottom:18px">Signature</h3>
-              <p class="lede">Set stones, applied indices, and case work done by hand. The pieces that carry the house style rather than follow it.</p>
-              <p class="tier__range" data-tier-range></p>
-              <p style="margin-top:26px"><a class="btn btn--text" href="shop.html?cat=diamond-gold">See Diamond &amp; Gold →</a></p>
-            </div>
-          </div>
-
-          <div class="tier tier--dark ink reveal" data-tier-3>
-            <div class="tier__art"><img src="" alt="" width="600" height="600" loading="lazy"></div>
-            <div class="tier__txt">
-              <p class="eyebrow eyebrow--onink">Register three</p>
-              <h3 class="h2" style="margin-bottom:18px">Haute Horlogerie</h3>
-              <p class="lede">Six references. Moon phases, perpetual calendars and grande complications, finished to a standard that takes months per piece.</p>
-              <p class="tier__range" data-tier-range></p>
-              <p style="margin-top:26px"><a class="btn btn--text" href="shop.html?cat=haute-horlogerie">Enter Haute Horlogerie →</a></p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Single-reference spotlight -->
-        <section class="section ink">
-          <div class="wrap">
-            <div class="spot reveal">
-              <div>
-                <p class="eyebrow eyebrow--onink">The house reference</p>
-                <h3 class="h2" style="margin-bottom:18px" data-spot-name></h3>
-                <p class="lede">A moon phase under sapphire, with the movement left on show and seventy-two hours in reserve.</p>
-                <p class="ref" data-spot-ref style="margin-top:18px"></p>
-              </div>
-              <div class="spot__art"><img data-spot-img src="" alt="" width="500" height="500" loading="lazy"></div>
-              <div class="spot--right">
-                <ul class="specs" data-spot-specs></ul>
-                <p class="price" style="font-size:26px;margin:28px 0 20px" data-spot-price></p>
-                <a class="btn btn--line" data-spot-link href="shop.html?cat=haute-horlogerie">Enquire</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="wrap">
-            <div class="listhd">
-              <div>
-                <p class="eyebrow eyebrow--blued mb0">Recently added</p>
-                <h2 class="h2">New to the vitrine</h2>
-              </div>
-              <a class="btn btn--text" href="shop.html" data-all-refs>All references →</a>
-            </div>
-            <div class="scroller" id="arrivals"></div>
-          </div>
-        </section>
-
-        <!-- Reviews. Sample content, labelled — see loadReviews(). -->
-        <section class="section" id="reviews">
-          <div class="wrap">
-            <div class="listhd">
-              <div>
-                <p class="eyebrow eyebrow--blued mb0">What people say</p>
-                <h2 class="h2">Read before you buy.</h2>
-              </div>
-              <div class="revsum" data-review-summary></div>
-            </div>
-            <p class="samplenote" data-review-note hidden></p>
-            <div class="revgrid reveal" data-review-list></div>
-          </div>
-        </section>
-
-        <!-- The salon. Line illustrations stand in for photography. -->
-        <section class="section boutique ink" id="salon">
-          <div class="wrap">
-            <p class="eyebrow eyebrow--onink reveal">The salon</p>
-            <h2 class="h1 reveal" style="max-width:18ch;margin-bottom:16px">Eighty years on the same corner.</h2>
-            <p class="lede reveal" style="max-width:52ch">Two rooms and a workshop behind them. Everything sold here has been through the bench at the back.</p>
-            <div class="scenes reveal" id="scenes"></div>
-          </div>
-        </section>
-
-        <section class="section" id="service">
-          <div class="wrap edit reveal">
-            <div class="edit__art">
-              <img data-service-img src="" alt="" width="600" height="750" loading="lazy">
-            </div>
-            <div>
-              <p class="eyebrow eyebrow--blued">Client care</p>
-              <h3 class="h1" style="margin-bottom:22px">A watch is not finished when it ships.</h3>
-              <p class="lede">Movements are opened, timed on six positions, and adjusted before they leave us. Bring the piece back at year five and we do it again, at no cost, for as long as you own it.</p>
-              <p style="margin-top:30px"><a class="btn btn--line" href="/about-us">Read our service standard</a></p>
-            </div>
-          </div>
-        </section>
-
+        <section class="newsletter-band"><div class="wrap newsletter-band__inner"><div><p class="eyebrow">Stay current</p><h2>New products and practical guides.</h2></div><div class="sub"><label class="sr" for="nl">Email address</label><input id="nl" type="email" placeholder="you@example.com" /><button type="button">Subscribe</button></div></div></section>
       </main>
 
-      <footer class="ft ink">
-        <div class="wrap">
-          <div class="ft__cols">
-            <div class="ft__col">
-              <p class="logo" style="text-align:left;margin-bottom:18px">Watch<span>i</span>no</p>
-              <p class="lede" style="font-size:14px" data-brand-tagline></p>
-              <p class="demonote" style="margin-top:18px">Demonstration storefront. No order is ever placed.</p>
-            </div>
-            <div class="ft__col">
-              <h4>Collections</h4>
-              <ul data-collections></ul>
-            </div>
-            <div class="ft__col">
-              <h4>Client care</h4>
-              <ul>
-                <li><a href="/about-us">About us</a></li>
-                <li><a href="/blog">Journal</a></li>
-                <li><a href="/terms#delivery">Shipping</a></li>
-                <li><a href="/terms#returns">Returns</a></li>
-                <li><a href="/terms#warranty">Warranty</a></li>
-                <li><a href="/contact-us">Contact us</a></li>
-                <li><a href="/terms">Terms</a></li>
-                <li><a href="/privacy">Privacy</a></li>
-              </ul>
-            </div>
-            <div class="ft__col ft__col--sub">
-              <h4>New references</h4>
-              <p class="lede" style="font-size:14px;color:var(--whisper)">We write when something arrives. Roughly once a month.</p>
-              <div class="sub">
-                <label class="sr" for="nl">Email address</label>
-                <input id="nl" type="email" placeholder="you@example.com" />
-                <button type="button">Subscribe</button>
-              </div>
-            </div>
-          </div>
-          <div class="ft__bar">
-            <span>© 2026 Watchino</span>
-            <span>Visa · Mastercard · Amex · Bank transfer</span>
-          </div>
-        </div>
-      </footer>
-
-    </div><!-- /.page -->
-
-    <!-- Mobile navigation -->
-    <div class="drawer ink" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
-      <div class="drawer__top">
-        <span class="rail__label" style="writing-mode:horizontal-tb">MENU</span>
-        <button class="xbtn" data-close>Close</button>
-      </div>
-      <nav data-drawer-nav aria-label="Mobile"></nav>
+      <footer class="ft ink"><div class="wrap"><div class="ft__cols"><div class="ft__col"><p class="logo digini-logo">DIGI<span>NI</span></p><p class="lede" data-brand-tagline>Smart technology, clearly chosen.</p><p class="demonote">Demonstration storefront. No order is ever placed.</p></div><div class="ft__col"><h4>Categories</h4><ul data-collections></ul></div><div class="ft__col"><h4>Help</h4><ul><li><a href="/about-us">About Digini</a></li><li><a href="/blog">Buying guides</a></li><li><a href="/terms#delivery">Shipping</a></li><li><a href="/terms#returns">Returns</a></li><li><a href="/contact-us">Contact us</a></li></ul></div><div class="ft__col"><h4>Policies</h4><ul><li><a href="/terms">Terms</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms#warranty">Warranty</a></li></ul></div></div><div class="ft__bar"><span>© 2026 Digini</span><span>Technology for every day</span></div></div></footer>
     </div>
 
-    <!-- Bag -->
-    <aside class="cart" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true">
-      <div class="cart__hd">
-        <span class="eyebrow mb0" data-cart-label>Your bag · 0</span>
-        <button class="xbtn" data-close>Close</button>
-      </div>
-      <div class="cart__body" data-cart-body></div>
-      <div class="cart__ft" data-cart-foot hidden>
-        <div class="sum__tot" style="border:0;padding:0;margin:0 0 18px">
-          <span class="eyebrow mb0">Subtotal</span>
-          <span class="price" style="font-family:var(--display);font-size:24px" data-cart-total>$0</span>
-        </div>
-        <a class="btn btn--full" href="checkout.html">Checkout</a>
-        <p class="cap center" style="margin-top:12px">Demonstration only — no order is placed.</p>
-      </div>
-    </aside>
-
-    <!-- Gallery lightbox (used from step 5) -->
-    <div class="lbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
-      <button class="lbox__x" data-close-lightbox>Close</button>
-      <figure class="lbox__fig">
-        <img alt="" hidden />
-        <figcaption class="lbox__cap"></figcaption>
-      </figure>
-    </div>
-
-
-
-    <!-- Search — client-side over the loaded catalogue -->
-
-    <aside class="sheet sheet--search" role="dialog" aria-modal="true" aria-label="Search the collection" aria-hidden="true">
-
-      <div class="sheet__hd">
-
-        <span class="eyebrow mb0">Search</span>
-
-        <button class="xbtn" data-close>Close</button>
-
-      </div>
-
-      <div class="sheet__pad">
-
-        <label class="sr" for="q">Search references</label>
-
-        <input id="q" type="search" autocomplete="off" placeholder="Reference, maker or collection" data-search-input data-autofocus />
-
-        <p class="cap" data-search-count style="margin-top:12px"></p>
-
-      </div>
-
-      <div class="sheet__body" data-search-results></div>
-
-    </aside>
-
-
-
-    <!-- Account -->
-
-    <aside class="sheet sheet--account" role="dialog" aria-modal="true" aria-label="Account" aria-hidden="true">
-
-      <div class="sheet__hd">
-
-        <span class="eyebrow mb0">Account</span>
-
-        <button class="xbtn" data-close>Close</button>
-
-      </div>
-
-      <div class="sheet__body" data-account-body></div>
-
-    </aside>
-
-
-
+    <div class="drawer ink" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true"><div class="drawer__top"><span class="eyebrow">Menu</span><button class="xbtn" type="button" data-close>Close</button></div><nav data-drawer-nav aria-label="Mobile"></nav></div>
+    <aside class="cart" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true"><div class="cart__hd"><span class="eyebrow mb0" data-cart-label>Your bag · 0</span><button class="xbtn" type="button" data-close>Close</button></div><div class="cart__body" data-cart-body></div><div class="cart__ft" data-cart-foot hidden><div class="sum__tot"><span class="eyebrow mb0">Subtotal</span><span class="price" data-cart-total>$0</span></div><a class="btn btn--full" href="checkout.html">Checkout</a><p class="cap center">Demonstration only — no order is placed.</p></div></aside>
+    <div class="lbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true"><button class="lbox__x" type="button" data-close-lightbox>Close</button><figure class="lbox__fig"><img alt="" hidden /><figcaption class="lbox__cap"></figcaption></figure></div>
+    <aside class="sheet sheet--search" role="dialog" aria-modal="true" aria-label="Search products" aria-hidden="true"><div class="sheet__hd"><span class="eyebrow mb0">Search Digini</span><button class="xbtn" type="button" data-close>Close</button></div><div class="sheet__pad"><label class="sr" for="q">Search products</label><input id="q" type="search" autocomplete="off" placeholder="Product, brand, or category" data-search-input data-autofocus /><p class="cap" data-search-count></p></div><div class="sheet__body" data-search-results></div></aside>
+    <aside class="sheet sheet--account" role="dialog" aria-modal="true" aria-label="Account" aria-hidden="true"><div class="sheet__hd"><span class="eyebrow mb0">Account</span><button class="xbtn" type="button" data-close>Close</button></div><div class="sheet__body" data-account-body></div></aside>
     <div class="scrim"></div>
   </body>
 </html>

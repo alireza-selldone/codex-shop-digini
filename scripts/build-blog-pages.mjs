@@ -26,14 +26,14 @@ const PAGES = [
   {
     file: "blog.html",
     script: "blog.js",
-    title: "Journal — Watchino",
-    desc: "Notes on choosing, wearing and looking after a mechanical watch.",
+    title: "Buying Guides — Digini",
+    desc: "Practical Digini guides for choosing, using, and caring for everyday technology.",
     main: `<main id="main" tabindex="-1">
 
         <section class="pghead ink">
           <div class="wrap">
-            <p class="eyebrow eyebrow--onink">The journal</p>
-            <h1 class="h1">Journal</h1>
+            <p class="eyebrow eyebrow--onink">Digini insights</p>
+            <h1 class="h1">Buying Guides</h1>
             <p class="pghead__meta" data-blog-count></p>
           </div>
         </section>
@@ -47,7 +47,7 @@ const PAGES = [
             <div class="posts" data-blog-list></div>
             <div class="sempty" data-blog-empty hidden>
               <p class="h3" style="margin-bottom:6px">No articles yet</p>
-              <p class="cap">When the journal is written, it appears here.</p>
+              <p class="cap">New Digini buying guides will appear here.</p>
             </div>
           </div>
         </section>
@@ -57,15 +57,15 @@ const PAGES = [
   {
     file: "article.html",
     script: "article.js",
-    title: "Journal — Watchino",
-    desc: "An article from the Watchino journal.",
+    title: "Buying Guides — Digini",
+    desc: "A practical technology guide from Digini.",
     main: `<main id="main" tabindex="-1">
 
         <article data-article>
           <section class="pghead ink">
             <div class="wrap">
               <div class="pgcol">
-                <p class="eyebrow eyebrow--onink" data-article-cat>Journal</p>
+                <p class="eyebrow eyebrow--onink" data-article-cat>Digini guide</p>
                 <h1 class="h1" data-article-title>&nbsp;</h1>
                 <p class="pghead__meta" data-article-meta></p>
               </div>

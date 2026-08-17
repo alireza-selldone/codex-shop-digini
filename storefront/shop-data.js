@@ -488,7 +488,7 @@ export async function loadCatalog() {
      collection, so the section is dropped entirely. Above ten it stops being
      scannable, so the ten largest are kept — `catsDropped` records how many
      were left out so the caller can say so rather than silently truncating. */
-  const MIN_CATS = 3, MAX_CATS = 10;
+  const MIN_CATS = 3, MAX_CATS = 15;
   const heroes = cfg.categoryHeroes || {};
   let cats = orderCategories(cfg, index).map((id) => {
     const meta = index.get(id);

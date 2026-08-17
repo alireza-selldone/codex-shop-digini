@@ -3,18 +3,15 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Journal — Watchino</title>
-    <meta
-      name="description"
-      content="Notes on choosing, wearing and looking after a mechanical watch."
-    />
-    <meta name="shop-name" content="Watchino" />
+    <title>Buying Guides — Digini</title>
+    <meta name="description" content="Shop laptops, cameras, audio, storage, displays, and portable power at Digini." />
+    <meta name="shop-name" content="Digini" />
     <meta name="pajulina-app-name" content="Selldone Shop A1" />
     <meta name="pajulina-client-id" content="019ff544-c6a2-73fa-b47c-75e4254fda53" />
-    <meta name="pajulina-shop-id" content="8460" />
-    <meta name="pajulina-shop-name" content="Watchino" />
-    <meta name="pajulina-shop-domain" content="watchino.myselldone.com" />
-    <meta name="pajulina-storefront-shop-handle" content="Watchino" />
+    <meta name="pajulina-shop-id" content="15549" />
+    <meta name="pajulina-shop-name" content="Digini" />
+    <meta name="pajulina-shop-domain" content="digini-hZGabLru.myselldone.com" />
+    <meta name="pajulina-storefront-shop-handle" content="digini-hZGabLru" />
     <meta name="pajulina-dashboard-path" content="/dashboard/" />
     <meta name="pajulina-callback-path" content="/callback/" />
     <meta name="pajulina-selldone-base" content="https://selldone.com" />
@@ -29,69 +26,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdn.selldone.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Archivo:wght@400;500;600&family=Azeret+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Azeret+Mono:wght@500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
     <script type="module" src="app.js"></script>
     <script type="module" src="blog.js"></script>
   </head>
   <body>
-
     <a class="skip" href="#main">Skip to content</a>
+    <div class="page digini-page">
+      <div class="sdbar"><p class="sdbar__in"><span class="sdbar__hx" aria-hidden="true">♥</span> Made with <a href="https://selldone.com" rel="noopener">Selldone</a></p></div>
 
-    <!-- Signature: chapter-ring index rail, doubles as scroll position -->
-    <aside class="rail" aria-hidden="true">
-      <span class="rail__label">WATCHINO</span>
-      <div class="rail__ticks"><span class="rail__marker"></span></div>
-      <span class="rail__label" data-brand-est></span>
-    </aside>
-
-    <div class="page">
-      <!-- Platform credit. Sits above the shop's own announcement bar and is
-           deliberately light: the announcement bar is dark, and two dark bars
-           stacked read as one heavy block. Outside the sticky header, so the
-           stuck-header height the sticky offsets depend on is unchanged. -->
-      <div class="sdbar">
-        <p class="sdbar__in"><span class="sdbar__hx" aria-hidden="true">&#9829;</span> Made with <a href="https://selldone.com" rel="noopener">Selldone</a></p>
-      </div>
-
-      <header class="hdr">
-        <div class="topbar">
-          <span class="topbar__long" data-announce-long>Insured worldwide delivery · Every reference authenticated in-house</span>
-          <span class="topbar__short" data-announce-short>Insured delivery · Authenticated in-house</span>
-        </div>
+      <header class="hdr digini-header">
+        <div class="topbar"><span class="topbar__long" data-announce-long>Curated electronics · Secure checkout · Helpful buying guides</span><span class="topbar__short" data-announce-short>Curated tech · Secure checkout</span></div>
         <div class="wrap hdr__in">
-          <div class="hdr__nav">
-            <nav class="nav" aria-label="Main">
-              <a href="shop.html">Collections</a>
-              <a href="shop.html?cat=haute-horlogerie">Haute Horlogerie</a>
-              <a href="/blog">Journal</a>
-              <a href="index.html#service">Client Care</a>
-            </nav>
-            <div class="mega"><div class="mega__grid" id="megagrid"></div></div>
-          </div>
-          <button class="burger mobonly" data-open="nav" aria-label="Open menu"><span></span></button>
-          <a class="logo" href="index.html">Watch<span>i</span>no</a>
+          <button class="burger mobonly" type="button" data-open="nav" aria-label="Open menu"><span></span></button>
+          <a class="logo digini-logo" href="index.html" aria-label="Digini home">DIGI<span>NI</span></a>
+          <button class="header-search" type="button" data-open="search" aria-label="Search products"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg><span>Search products, categories, and brands</span></button>
           <div class="hdr__act">
-            <button class="iconbtn" type="button" data-open="search" aria-label="Search">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
-            </button>
-            <button class="iconbtn" type="button" data-open="account" aria-label="Account">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg>
-            </button>
-            <button class="iconbtn" data-open="cart" aria-label="Open bag, 0 items">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-              <span class="cartdot" data-cart-count hidden>0</span>
-            </button>
+            <button class="iconbtn" type="button" data-open="account" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
+            <button class="iconbtn" type="button" data-open="cart" aria-label="Open bag, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartdot" data-cart-count hidden>0</span></button>
           </div>
         </div>
+        <div class="digini-navrow"><div class="wrap"><nav class="nav" aria-label="Main"><a href="shop.html"><b>Shop All</b></a><a href="shop.html?cat=laptop">Computers</a><a href="shop.html?cat=monitors">Displays</a><a href="shop.html?cat=digital-camera">Cameras</a><a href="shop.html?cat=headphones">Audio</a><a href="shop.html?cat=hard-drive">Storage</a><a href="shop.html?cat=rv">Portable Power</a><a href="/blog">Buying Guides</a></nav><div class="mega"><div class="mega__grid" id="megagrid"></div></div></div></div>
       </header>
 
       <main id="main" tabindex="-1">
 
         <section class="pghead ink">
           <div class="wrap">
-            <p class="eyebrow eyebrow--onink">The journal</p>
-            <h1 class="h1">Journal</h1>
+            <p class="eyebrow eyebrow--onink">Digini insights</p>
+            <h1 class="h1">Buying Guides</h1>
             <p class="pghead__meta" data-blog-count></p>
           </div>
         </section>
@@ -105,140 +69,21 @@
             <div class="posts" data-blog-list></div>
             <div class="sempty" data-blog-empty hidden>
               <p class="h3" style="margin-bottom:6px">No articles yet</p>
-              <p class="cap">When the journal is written, it appears here.</p>
+              <p class="cap">New Digini buying guides will appear here.</p>
             </div>
           </div>
         </section>
 
       </main>
 
-      <footer class="ft ink">
-        <div class="wrap">
-          <div class="ft__cols">
-            <div class="ft__col">
-              <p class="logo" style="text-align:left;margin-bottom:18px">Watch<span>i</span>no</p>
-              <p class="lede" style="font-size:14px" data-brand-tagline></p>
-              <p class="demonote" style="margin-top:18px">Demonstration storefront. No order is ever placed.</p>
-            </div>
-            <div class="ft__col">
-              <h4>Collections</h4>
-              <ul data-collections></ul>
-            </div>
-            <div class="ft__col">
-              <h4>Client care</h4>
-              <ul>
-                <li><a href="/about-us">About us</a></li>
-                <li><a href="/blog">Journal</a></li>
-                <li><a href="/terms#delivery">Shipping</a></li>
-                <li><a href="/terms#returns">Returns</a></li>
-                <li><a href="/terms#warranty">Warranty</a></li>
-                <li><a href="/contact-us">Contact us</a></li>
-                <li><a href="/terms">Terms</a></li>
-                <li><a href="/privacy">Privacy</a></li>
-              </ul>
-            </div>
-            <div class="ft__col ft__col--sub">
-              <h4>New references</h4>
-              <p class="lede" style="font-size:14px;color:var(--whisper)">We write when something arrives. Roughly once a month.</p>
-              <div class="sub">
-                <label class="sr" for="nl">Email address</label>
-                <input id="nl" type="email" placeholder="you@example.com" />
-                <button type="button">Subscribe</button>
-              </div>
-            </div>
-          </div>
-          <div class="ft__bar">
-            <span>© 2026 Watchino</span>
-            <span>Visa · Mastercard · Amex · Bank transfer</span>
-          </div>
-        </div>
-      </footer>
-
-    </div><!-- /.page -->
-
-    <!-- Mobile navigation -->
-    <div class="drawer ink" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
-      <div class="drawer__top">
-        <span class="rail__label" style="writing-mode:horizontal-tb">MENU</span>
-        <button class="xbtn" data-close>Close</button>
-      </div>
-      <nav data-drawer-nav aria-label="Mobile"></nav>
+      <footer class="ft ink"><div class="wrap"><div class="ft__cols"><div class="ft__col"><p class="logo digini-logo">DIGI<span>NI</span></p><p class="lede" data-brand-tagline>Smart technology, clearly chosen.</p><p class="demonote">Demonstration storefront. No order is ever placed.</p></div><div class="ft__col"><h4>Categories</h4><ul data-collections></ul></div><div class="ft__col"><h4>Help</h4><ul><li><a href="/about-us">About Digini</a></li><li><a href="/blog">Buying guides</a></li><li><a href="/terms#delivery">Shipping</a></li><li><a href="/terms#returns">Returns</a></li><li><a href="/contact-us">Contact us</a></li></ul></div><div class="ft__col"><h4>Policies</h4><ul><li><a href="/terms">Terms</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms#warranty">Warranty</a></li></ul></div></div><div class="ft__bar"><span>© 2026 Digini</span><span>Technology for every day</span></div></div></footer>
     </div>
 
-    <!-- Bag -->
-    <aside class="cart" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true">
-      <div class="cart__hd">
-        <span class="eyebrow mb0" data-cart-label>Your bag · 0</span>
-        <button class="xbtn" data-close>Close</button>
-      </div>
-      <div class="cart__body" data-cart-body></div>
-      <div class="cart__ft" data-cart-foot hidden>
-        <div class="sum__tot" style="border:0;padding:0;margin:0 0 18px">
-          <span class="eyebrow mb0">Subtotal</span>
-          <span class="price" style="font-family:var(--display);font-size:24px" data-cart-total>$0</span>
-        </div>
-        <a class="btn btn--full" href="checkout.html">Checkout</a>
-        <p class="cap center" style="margin-top:12px">Demonstration only — no order is placed.</p>
-      </div>
-    </aside>
-
-    <!-- Gallery lightbox (used from step 5) -->
-    <div class="lbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
-      <button class="lbox__x" data-close-lightbox>Close</button>
-      <figure class="lbox__fig">
-        <img alt="" hidden />
-        <figcaption class="lbox__cap"></figcaption>
-      </figure>
-    </div>
-
-
-
-    <!-- Search — client-side over the loaded catalogue -->
-
-    <aside class="sheet sheet--search" role="dialog" aria-modal="true" aria-label="Search the collection" aria-hidden="true">
-
-      <div class="sheet__hd">
-
-        <span class="eyebrow mb0">Search</span>
-
-        <button class="xbtn" data-close>Close</button>
-
-      </div>
-
-      <div class="sheet__pad">
-
-        <label class="sr" for="q">Search references</label>
-
-        <input id="q" type="search" autocomplete="off" placeholder="Reference, maker or collection" data-search-input data-autofocus />
-
-        <p class="cap" data-search-count style="margin-top:12px"></p>
-
-      </div>
-
-      <div class="sheet__body" data-search-results></div>
-
-    </aside>
-
-
-
-    <!-- Account -->
-
-    <aside class="sheet sheet--account" role="dialog" aria-modal="true" aria-label="Account" aria-hidden="true">
-
-      <div class="sheet__hd">
-
-        <span class="eyebrow mb0">Account</span>
-
-        <button class="xbtn" data-close>Close</button>
-
-      </div>
-
-      <div class="sheet__body" data-account-body></div>
-
-    </aside>
-
-
-
+    <div class="drawer ink" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true"><div class="drawer__top"><span class="eyebrow">Menu</span><button class="xbtn" type="button" data-close>Close</button></div><nav data-drawer-nav aria-label="Mobile"></nav></div>
+    <aside class="cart" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true"><div class="cart__hd"><span class="eyebrow mb0" data-cart-label>Your bag · 0</span><button class="xbtn" type="button" data-close>Close</button></div><div class="cart__body" data-cart-body></div><div class="cart__ft" data-cart-foot hidden><div class="sum__tot"><span class="eyebrow mb0">Subtotal</span><span class="price" data-cart-total>$0</span></div><a class="btn btn--full" href="checkout.html">Checkout</a><p class="cap center">Demonstration only — no order is placed.</p></div></aside>
+    <div class="lbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true"><button class="lbox__x" type="button" data-close-lightbox>Close</button><figure class="lbox__fig"><img alt="" hidden /><figcaption class="lbox__cap"></figcaption></figure></div>
+    <aside class="sheet sheet--search" role="dialog" aria-modal="true" aria-label="Search products" aria-hidden="true"><div class="sheet__hd"><span class="eyebrow mb0">Search Digini</span><button class="xbtn" type="button" data-close>Close</button></div><div class="sheet__pad"><label class="sr" for="q">Search products</label><input id="q" type="search" autocomplete="off" placeholder="Product, brand, or category" data-search-input data-autofocus /><p class="cap" data-search-count></p></div><div class="sheet__body" data-search-results></div></aside>
+    <aside class="sheet sheet--account" role="dialog" aria-modal="true" aria-label="Account" aria-hidden="true"><div class="sheet__hd"><span class="eyebrow mb0">Account</span><button class="xbtn" type="button" data-close>Close</button></div><div class="sheet__body" data-account-body></div></aside>
     <div class="scrim"></div>
   </body>
 </html>

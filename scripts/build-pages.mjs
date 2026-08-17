@@ -28,9 +28,9 @@ const TOKENS = {
   SHOP_NAME: CFG.shop?.name || "",
   SHOP_DOMAIN: CFG.shop?.domain || "",
   FOUNDED_YEAR: CFG.brand?.foundedYear != null ? String(CFG.brand.foundedYear) : "",
-  COUNTRY: CFG.brand?.country || "",
+  COUNTRY: CFG.brand?.country || "your applicable jurisdiction",
   CURRENCY: CFG.brand?.currency || "USD",
-  LAST_UPDATED: CFG.brand?.lastUpdated || "",
+  LAST_UPDATED: CFG.brand?.lastUpdated || "17 August 2026",
   RETURN_DAYS: "30",
   REFUND_DAYS: "14",
   DAMAGE_WINDOW: "7",
@@ -51,7 +51,7 @@ for (const [k, v] of Object.entries(TOKENS)) if (!v) delete TOKENS[k];
 const UNFILLED = new Set(["SHOP_EMAIL", "SHOP_PHONE", "SHOP_ADDRESS", "COMPANY_REGISTRATION"]);
 
 const PAGES = {
-  "about-us": ["The house", "Who we are, how references are chosen, and what to expect after the sale."],
+  "about-us": ["About Digini", "How Digini selects useful technology and helps customers choose with confidence."],
   terms: ["Client care", "Terms and conditions covering orders, prices, delivery, returns and warranty."],
   privacy: ["Client care", "What personal information this shop collects, why, and how to have it removed."],
   "contact-us": ["Client care", "How to reach us, what to include, and how long a reply takes."],
@@ -77,7 +77,7 @@ const inline = (t) => fill(escape(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</stro
 /* The Markdown subset the sources actually use: headings, paragraphs, bold,
    bullet lists, pipe tables, and the raw <h2 id> the footer anchors need. */
 function render(md) {
-  const lines = md.split("\n");
+  const lines = md.split(/\r?\n/);
   const body = [];
   let title = null, meta = null, i = 0;
 

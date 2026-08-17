@@ -32,7 +32,7 @@ const CONFIG = join(ROOT, "shop.config.json");
 const XAPI = "https://xapi.selldone.com";
 
 const MIN_CATS = 3;
-const MAX_CATS = 10;
+const MAX_CATS = 15;
 
 /* ---------- arguments ---------- */
 function args() {

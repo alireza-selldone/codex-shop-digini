@@ -32,21 +32,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     err.hidden = false;
     err.textContent = msg;
     document.querySelector("[data-article-title]").textContent = "Article not found";
-    document.title = "Article not found — Watchino";
+    document.title = "Article not found — Digini";
   };
 
-  if (!slug && !blogId) return fail("No article was requested. Choose one from the journal.");
+  if (!slug && !blogId) return fail("No article was requested. Choose one from the buying guides.");
 
   let a;
   try {
     a = await loadArticle({ blogId, slug });
   } catch (e) {
-    console.error("[watchino] article load failed", e);
+    console.error("[digini] article load failed", e);
     return fail("This article could not be loaded from Selldone. Refresh to try again.");
   }
   if (!a) return fail("That article does not exist, or is no longer published.");
 
-  document.title = `${a.title} — Watchino`;
+  document.title = `${a.title} — Digini`;
   document.querySelector("[data-article-title]").textContent = a.title;
 
   const meta = [fmtDate(a.date), a.author].filter(Boolean).join(" · ");

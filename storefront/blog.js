@@ -1,4 +1,4 @@
-/* Journal listing. Category filtering is server-side via ?category=<id>, which
+/* Digini buying guide listing. Category filtering is server-side via ?category=<id>, which
    the list endpoint documents; the chips below reflect the real category list
    and its real per-category counts. */
 import { loadBlog } from "./shop-data.js";
@@ -71,8 +71,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     render({ posts, cats, total, active: cats.some((c) => c.id === wanted) ? wanted : null });
   } catch (e) {
     err.hidden = false;
-    err.textContent = "The journal could not be loaded from Selldone. Refresh to try again.";
+    err.textContent = "The buying guides could not be loaded from Selldone. Refresh to try again.";
     document.querySelector("[data-blog-empty]").hidden = true;
-    console.error("[watchino] blog load failed", e);
+    console.error("[digini] blog load failed", e);
   }
 });

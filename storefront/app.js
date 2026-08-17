@@ -1,4 +1,4 @@
-/* Watchino — storefront UI.
+/* Digini — storefront UI.
    Ported from design-reference/app.js. Behaviour is the prototype's; the data
    behind it is live Selldone. A capability demonstration: no order is placed. */
 
@@ -212,21 +212,22 @@ function fillNav() {
       <a class="mega__item" href="shop.html?cat=${c.slug}">
         <img src="${c.image}" alt="${esc(c.name)} — ${esc(c.heroName)}" loading="lazy" width="200" height="200">
         <b>${esc(c.name)}</b>
-        <span class="cap">${c.count} references</span>
+        <span class="cap">${c.count} products</span>
       </a>`).join("");
   }
 
   document.querySelectorAll("[data-collections]").forEach((ul) => {
-    ul.innerHTML = CAT.cats.map((c) =>
-      `<li><a href="shop.html?cat=${c.slug}">${esc(c.name)}</a></li>`).join("");
+    ul.innerHTML = CAT.cats.slice(0, 8).map((c) =>
+      `<li><a href="shop.html?cat=${c.slug}">${esc(c.name)}</a></li>`).join("") +
+      `<li><a href="shop.html"><b>View all categories</b></a></li>`;
   });
 
   document.querySelectorAll("[data-drawer-nav]").forEach((nav) => {
     nav.innerHTML =
-      `<a href="shop.html">All references<small>${CAT.products.length} in the collection</small></a>` +
+      `<a href="shop.html">All products<small>${CAT.products.length} in the catalog</small></a>` +
       CAT.cats.map((c) =>
-        `<a href="shop.html?cat=${c.slug}">${esc(c.name)}<small>${c.count} references · from ${money(c.from)}</small></a>`).join("") +
-      `<a href="index.html#service">Client care</a>`;
+        `<a href="shop.html?cat=${c.slug}">${esc(c.name)}<small>${c.count} products · from ${money(c.from)}</small></a>`).join("") +
+      `<a href="/contact-us">Customer support</a>`;
   });
 }
 
@@ -252,7 +253,7 @@ function renderBag() {
     body.innerHTML = `<div style="padding:48px 0;text-align:center">
       <p class="h3" style="margin-bottom:8px">Your bag is empty</p>
       <p class="cap" style="margin-bottom:24px">Nothing selected yet.</p>
-      <a class="btn btn--line" href="shop.html">Browse the collection</a></div>`;
+      <a class="btn btn--line" href="shop.html">Browse products</a></div>`;
     if (foot) foot.hidden = true;
     return;
   }
@@ -343,7 +344,7 @@ function initNewsletter() {
       input.value = "";
     } catch (err) {
       show(err.message || "That did not go through. Try again shortly.", true);
-      console.error("[watchino] subscribe failed", err);
+      console.error("[digini] subscribe failed", err);
     } finally {
       busy = false;
       btn.disabled = false;
@@ -371,11 +372,11 @@ function initSearch() {
   const norm = (v) => String(v ?? "").toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
 
   function run() {
-    if (!CAT) { count.textContent = "Loading the collection…"; return; }
+    if (!CAT) { count.textContent = "Loading the catalog…"; return; }
     const q = norm(input.value).trim();
     if (!q) {
       out.innerHTML = "";
-      count.textContent = `${CAT.products.length} references in the collection`;
+      count.textContent = `${CAT.products.length} products in the catalog`;
       return;
     }
     // Every term must appear somewhere in the record, so "molino gold" narrows
@@ -386,7 +387,7 @@ function initSearch() {
       return terms.every((t) => hay.includes(t));
     });
 
-    count.textContent = hits.length === 1 ? "1 reference" : `${hits.length} references`;
+    count.textContent = hits.length === 1 ? "1 product" : `${hits.length} products`;
     out.innerHTML = hits.length
       ? hits.map((p) => `<a class="sres" href="product.html?id=${p.id}">
           <span class="sres__art"><img src="${p.image}" alt="" loading="lazy" width="56" height="56"></span>
@@ -395,7 +396,7 @@ function initSearch() {
         </a>`).join("")
       : `<div class="sempty">
            <p class="h3" style="margin-bottom:6px">Nothing matches “${esc(input.value.trim())}”</p>
-           <p class="cap">Try a maker, a collection, or part of a reference name.</p>
+           <p class="cap">Try a brand, category, or part of a product name.</p>
          </div>`;
   }
 
@@ -407,7 +408,7 @@ function initSearch() {
 
 /* ---------- Account ---------- */
 /* Authorization Code + PKCE, public client. Customer-facing copy never names
-   Selldone: the customer is signing in to Watchino. Selldone is our
+   Selldone: the customer is signing in to Digini. Selldone is our
    infrastructure, not the shop's brand.
 
    Nothing raw is ever shown to a visitor. A failure gets a plain sentence here
@@ -440,7 +441,7 @@ async function renderAccount() {
   try {
     s = await storefrontAuth.session();
   } catch (err) {
-    console.error("[watchino] session lookup failed", err);
+    console.error("[digini] session lookup failed", err);
     body.innerHTML = `<div class="acct">
       <p class="lede" style="margin-bottom:20px">We could not check whether you are signed in. Try again in a moment.</p>
       <button class="btn btn--full" type="button" data-signin>Sign in</button>
@@ -497,7 +498,7 @@ async function renderOrders(host, token) {
         <span class="price">${money(o.total)}</span>
       </div>`).join("");
   } catch (err) {
-    console.error("[watchino] order history failed", err);
+    console.error("[digini] order history failed", err);
     host.innerHTML = `<p class="cap" style="margin:22px 0">Your orders could not be loaded just now.</p>`;
   }
 }
@@ -569,13 +570,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (err) {
     document.querySelectorAll("[data-catalog-error]").forEach((e) => {
       e.hidden = false;
-      e.textContent = "The collection could not be loaded from Selldone. Refresh to try again.";
+      e.textContent = "The catalog could not be loaded from Selldone. Refresh to try again.";
     });
-    console.error("[watchino] catalog load failed", err);
+    console.error("[digini] catalog load failed", err);
     return;
   }
 
-  window.__WATCHINO__ = CAT; // inspection handle for verification
+  window.__DIGINI__ = CAT; // inspection handle for verification
   fillNav();
   renderBag();
   document.addEventListener("bag:changed", renderBag);
