@@ -1,6 +1,6 @@
 /* Digini homepage — live Selldone catalog with an editorial technology shell. */
 
-import { loadCatalog } from "./shop-data.js";
+import { loadCatalog, loadReviews } from "./shop-data.js";
 import { cardHTML, esc } from "./app.js";
 
 const CATEGORY_ART = {
@@ -125,6 +125,49 @@ function fillHome(catalog) {
 
   const categories = catalog.cats.length;
   document.querySelectorAll("[data-category-count]").forEach((el) => { el.textContent = categories; });
+
+  renderHomeReviews(catalog.products);
+}
+
+function renderHomeReviews(products) {
+  const summary = loadReviews(products);
+  const average = document.querySelector("[data-home-review-average]");
+  const count = document.querySelector("[data-home-review-count]");
+  const mode = document.querySelector("[data-home-review-mode]");
+  const breakdown = document.querySelector("[data-home-review-breakdown]");
+  const grid = document.querySelector("[data-home-reviews]");
+  const disclosure = document.querySelector("[data-home-review-disclosure]");
+  if (!grid || !breakdown) return;
+
+  if (average) average.textContent = summary.average.toFixed(1);
+  if (count) count.textContent = `${summary.total} ${summary.sample ? "sample reviews" : "live ratings"}`;
+  if (mode) mode.textContent = summary.sample ? "Sample customer notes" : "Live customer ratings";
+  if (disclosure) {
+    disclosure.textContent = summary.sample
+      ? "Sample reviews are shown for this demonstration storefront."
+      : "Score and distribution are calculated from live product ratings.";
+  }
+
+  breakdown.innerHTML = summary.counts.map(({ star, count: starCount, pct }) => `
+    <div class="home-rating-row">
+      <span>${star} star</span>
+      <i aria-hidden="true"><b style="width:${pct}%"></b></i>
+      <em>${starCount}</em>
+    </div>`).join("");
+
+  grid.innerHTML = summary.reviews.slice(0, 3).map((review) => {
+    const rating = Math.max(1, Math.min(5, Math.round(review.rating || 0)));
+    const label = `${rating} out of 5 stars`;
+    const initials = String(review.name || "Digini customer")
+      .split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase();
+    const body = review.body || `Customer rating for ${review.name || "a Digini product"}.`;
+    const meta = [summary.sample ? "Sample review" : "Live product rating", review.city].filter(Boolean).join(" · ");
+    return `<article class="home-review-card">
+      <div class="home-review-card__top"><span class="home-review-quote" aria-hidden="true">“</span><span class="review-stars" role="img" aria-label="${label}">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</span></div>
+      <p>${esc(body)}</p>
+      <footer><span class="home-review-avatar" aria-hidden="true">${esc(initials || "DC")}</span><span><b>${esc(review.name || "Digini customer")}</b><small>${esc(meta)}</small></span></footer>
+    </article>`;
+  }).join("");
 }
 
 initCampaigns();
