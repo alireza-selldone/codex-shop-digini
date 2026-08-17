@@ -1648,6 +1648,7 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 .shop .listhd .h1{font-size:clamp(34px,3.2vw,48px);line-height:1.02;}
 .shop .listhd{margin-bottom:24px;}
 .pgrid{gap:14px;}
+@media (min-width:1280px){.shop .pgrid{grid-template-columns:repeat(4,minmax(0,1fr));}}
 .shophead,.article__hero,.contenthero{background:var(--theme-deep);color:#fff;}
 .finput,.fselect,input[type="search"],input[type="email"]{border-radius:8px;}
 .sheet,.cart,.drawer{border-radius:16px 0 0 16px;}
