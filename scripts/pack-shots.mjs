@@ -31,7 +31,7 @@ const TOKEN = JSON.stringify({
   token_type: "Bearer",
 });
 const PROFILE = { user: { name: "Robert Donnie", email: "demo@example.com", id: 8 } };
-const BAG = JSON.stringify([{ id: 709403, qty: 1 }, { id: 325648, qty: 2 }]);
+const BAG = JSON.stringify([{ id: 710103, qty: 1 }, { id: 710041, qty: 2 }]);
 
 async function settle(p) {
   await p.waitForLoadState("networkidle", { timeout: 8000 }).catch(() => {});

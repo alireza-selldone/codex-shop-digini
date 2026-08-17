@@ -94,6 +94,8 @@ function initCampaigns() {
 function fillHome(catalog) {
   const ids = new Map((catalog.cfg.categories || []).map((item) => [item.slug, item.id]));
   const grid = document.getElementById("catgrid");
+  const categorySection = grid?.closest("section");
+  if (categorySection) categorySection.hidden = catalog.cats.length === 0;
   if (grid) {
     grid.dataset.n = String(catalog.cats.length);
     grid.innerHTML = catalog.cats.map((category) => {

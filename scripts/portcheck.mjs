@@ -81,6 +81,7 @@ async function run(browser, { nCats, nProducts = 40, cfg = null, label }) {
   const p = await ctx.newPage();
   const errs = [];
   p.on("pageerror", (e) => errs.push(e.message));
+  p.on("console", (message) => { if (message.type() === "error") errs.push(message.text()); });
   await p.goto(BASE + "/", { waitUntil: "domcontentloaded" });
   await p.waitForTimeout(3500);
 
@@ -119,7 +120,7 @@ const browser = await chromium.launch();
 
 console.log("\nA DIFFERENT SHOP — none of this repo's category ids appear in the data");
 console.log("-".repeat(66));
-for (const [nCats, wantCols] of [[3, 3], [4, 4], [5, 3], [6, 3], [7, 4], [8, 4], [9, 5], [10, 5]]) {
+for (const [nCats, wantCols] of [[3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [9, 5], [10, 5]]) {
   const r = await run(browser, { nCats, cfg: REAL_CFG, label: `${nCats} categories` });
   const ok = r.tiles === nCats && r.cols === wantCols && !r.hidden;
   const line = `${String(nCats).padStart(2)} categories -> ${r.tiles} tiles, ${r.cols} columns`;
@@ -137,9 +138,9 @@ console.log("-".repeat(66));
 }
 {
   const r = await run(browser, { nCats: 12, cfg: REAL_CFG });
-  (r.tiles === 10)
-    ? pass("12 categories -> the 10 largest kept")
-    : fail(`12 categories -> ${r.tiles} tiles, expected 10`);
+  (r.tiles === 12)
+    ? pass("12 categories -> all 12 retained within the 15-category limit")
+    : fail(`12 categories -> ${r.tiles} tiles, expected 12`);
 }
 
 console.log("\nSLUGS DERIVED FROM LIVE TITLES");

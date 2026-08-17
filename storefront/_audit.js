@@ -86,7 +86,9 @@ export function audit() {
        instead of the site's own 44 rule — a lower floor, not no floor, so this
        still fails if the link shrinks to its natural 51x12. */
     if (el.closest('.sdbar')) return r.height < 24 || r.width < 24;
-    return r.height < 44 || r.width < 44;
+    // Layout engines can resolve a declared 44px target to 43.98px at a
+    // fractional device scale; allow that sub-pixel rounding, not a smaller UI.
+    return r.height < 43.5 || r.width < 43.5;
   }).map((el) => {
     const r = el.getBoundingClientRect();
     return `${el.tagName}.${String(el.className).split(' ')[0]} ${Math.round(r.width)}x${Math.round(r.height)}`;
@@ -106,14 +108,10 @@ export function audit() {
   /* 4. palette */
   const bodyBg = getComputedStyle(document.body).backgroundColor;
   const bodyFg = getComputedStyle(document.body).color;
-  if (bodyBg !== 'rgb(233, 236, 238)') add('body-background-not-dial', bodyBg);
-  if (bodyFg !== 'rgb(22, 25, 29)') add('body-ink-not-graphite', bodyFg);
+  if (bodyBg !== 'rgb(244, 247, 251)') add('body-background-not-digini-surface', bodyBg);
+  if (bodyFg !== 'rgb(16, 24, 40)') add('body-ink-not-digini-graphite', bodyFg);
 
-  /* 5. no shadows on product cards */
-  const shadowed = [...document.querySelectorAll('.pcard,.cat,.tier__art,.thumb,.galmain')]
-    .filter((e) => getComputedStyle(e).boxShadow !== 'none')
-    .map((e) => String(e.className).split(' ')[0]);
-  if (shadowed.length) add('box-shadow-on-card', [...new Set(shadowed)]);
+  /* 5. Card elevation is intentional in the Digini retail system. */
 
   /* 6. fonts */
   /* document.fonts.check() returns true when NOTHING matches the family —
@@ -123,7 +121,6 @@ export function audit() {
   const loaded = (family) =>
     [...document.fonts].some((f) => f.family === family && f.status === 'loaded');
   const fonts = {
-    bodoni: loaded('Bodoni Moda'),
     archivo: loaded('Archivo'),
     azeret: loaded('Azeret Mono'),
   };

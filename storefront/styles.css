@@ -1342,7 +1342,7 @@ html.js-reveal .reveal.is-in{opacity:1;transform:none;}
 /* Hero in plate or slides mode: a product photograph, contained never cropped. */
 .hero__plate{object-fit:contain !important;padding:4%;}
 
-/* ========================================================================== 
+/* ==========================================================================
    Digini 2026 — high-clarity electronics retail system
    ========================================================================== */
 :root{
@@ -1407,8 +1407,9 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 .campaign-hero__copy>p:not(.eyebrow){font-size:18px;line-height:1.55;color:#D9E6F8;margin:0;max-width:43ch;}
 .campaign-hero__actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;}
 .campaign-hero__dots{position:absolute;z-index:4;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:9px;padding:8px 10px;border-radius:99px;background:rgba(6,22,47,.72);}
-.campaign-hero__dots button{width:28px;height:8px;border-radius:99px;background:rgba(255,255,255,.45);}
-.campaign-hero__dots button[aria-current="true"]{background:#fff;}
+.campaign-hero__dots button{position:relative;width:44px;height:44px;margin:-18px -7px;border-radius:99px;background:transparent;}
+.campaign-hero__dots button::after{content:"";position:absolute;left:8px;right:8px;top:18px;height:8px;border-radius:99px;background:rgba(255,255,255,.45);}
+.campaign-hero__dots button[aria-current="true"]::after{background:#fff;}
 
 .benefit-bar{background:#fff;border-bottom:1px solid var(--rule);}
 .benefit-bar__grid{display:grid;grid-template-columns:repeat(4,1fr);}
@@ -1462,7 +1463,7 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 
 .newsletter-band{background:#F04438;color:#fff;padding:52px 0;}
 .newsletter-band__inner{display:flex;align-items:center;justify-content:space-between;gap:36px;}
-.newsletter-band .eyebrow{color:#fff;margin-bottom:5px;}
+.newsletter-band .eyebrow{color:#07182F;margin-bottom:5px;}
 .newsletter-band h2{font-size:clamp(26px,3.4vw,42px);}
 .newsletter-band .sub{width:min(100%,480px);background:#fff;border-radius:9px;padding:4px;}
 .newsletter-band .sub input{color:var(--graphite);}
