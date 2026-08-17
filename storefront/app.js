@@ -13,6 +13,48 @@ import { shopConfig, isUnconfigured } from "./shop-config.js";
 
 let CAT = null;
 
+/* ---------- Shared storefront chrome ----------
+   Every public page uses one header and footer contract. Older standalone
+   pages still carry their original Watchino markup as a no-JS fallback; this
+   replacement runs before any header behavior is wired, so the live interface
+   is identical everywhere and future chrome changes have one source. */
+const SHARED_HEADER_HTML = `<header class="hdr digini-header">
+  <div class="topbar"><span class="topbar__long" data-announce-long>Curated electronics · Secure checkout · Helpful buying guides</span><span class="topbar__short" data-announce-short>Curated tech · Secure checkout</span></div>
+  <div class="wrap hdr__in">
+    <button class="burger mobonly" type="button" data-open="nav" aria-label="Open menu"><span></span></button>
+    <a class="logo digini-logo" href="index.html" aria-label="Digini home">DIGI<span>NI</span></a>
+    <button class="header-search" type="button" data-open="search" aria-label="Search products"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg><span>Search products, categories, and brands</span></button>
+    <div class="hdr__act">
+      <button class="iconbtn" type="button" data-open="account" aria-label="Account"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></svg></button>
+      <button class="iconbtn" type="button" data-open="cart" aria-label="Open bag, 0 items"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="cartdot" data-cart-count hidden>0</span></button>
+    </div>
+  </div>
+  <div class="digini-navrow"><div class="wrap"><nav class="nav" aria-label="Main"><a href="shop.html"><b>Shop All</b></a><a href="shop.html?cat=laptop">Computers</a><a href="shop.html?cat=monitors">Displays</a><a href="shop.html?cat=digital-camera">Cameras</a><a href="shop.html?cat=headphones">Audio</a><a href="shop.html?cat=hard-drive">Storage</a><a href="shop.html?cat=rv">Portable Power</a><a href="/blog">Buying Guides</a></nav><div class="mega"><div class="mega__grid" id="megagrid"></div></div></div></div>
+</header>`;
+
+const SHARED_FOOTER_HTML = `<footer class="ft ink"><div class="wrap"><div class="ft__cols"><div class="ft__col ft__brand"><p class="logo digini-logo">DIGI<span>NI</span></p><p class="lede" data-brand-tagline>Smart technology, clearly chosen.</p><p class="demonote">Demonstration storefront. No order is ever placed.</p><div class="ft__socials" aria-label="Social media"><span role="img" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1" class="fill"/></svg></span><span role="img" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5l12 14M18 5 6 19"/></svg></span><span role="img" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="4"/><path d="m10 9 5 3-5 3Z" class="fill"/></svg></span><span role="img" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="9" width="3" height="10" class="fill"/><circle cx="5.5" cy="5.5" r="1.7" class="fill"/><path d="M11 19v-6c0-2 1.2-3.2 3.1-3.2 2 0 3 1.3 3 3.4V19M11 10v9"/></svg></span></div></div><div class="ft__col"><h4>Categories</h4><ul data-collections></ul></div><div class="ft__col"><h4>Help</h4><ul><li><a href="/about-us">About Digini</a></li><li><a href="/blog">Buying guides</a></li><li><a href="/terms#delivery">Shipping</a></li><li><a href="/terms#returns">Returns</a></li><li><a href="/contact-us">Contact us</a></li></ul></div><div class="ft__col"><h4>Policies</h4><ul><li><a href="/terms">Terms</a></li><li><a href="/privacy">Privacy</a></li><li><a href="/terms#warranty">Warranty</a></li></ul></div></div><div class="ft__bar"><span>© 2026 Digini · Technology for every day</span><span class="ft__payments" aria-label="Accepted payment methods"><span class="ft__payment ft__payment--visa" role="img" aria-label="Visa">VISA</span><span class="ft__payment ft__payment--mastercard" role="img" aria-label="Mastercard"><i></i><i></i></span><span class="ft__payment ft__payment--amex" role="img" aria-label="American Express">AMEX</span></span></div></div></footer>`;
+
+const SHARED_OVERLAYS_HTML = `<div class="drawer ink" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true"><div class="drawer__top"><span class="eyebrow">Menu</span><button class="xbtn" type="button" data-close>Close</button></div><nav data-drawer-nav aria-label="Mobile"></nav></div>
+<aside class="cart" role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden="true"><div class="cart__hd"><span class="eyebrow mb0" data-cart-label>Your bag · 0</span><button class="xbtn" type="button" data-close>Close</button></div><div class="cart__body" data-cart-body></div><div class="cart__ft" data-cart-foot hidden><div class="sum__tot"><span class="eyebrow mb0">Subtotal</span><span class="price" data-cart-total>$0</span></div><a class="btn btn--full" href="checkout.html">Checkout</a><p class="cap center">Demonstration only — no order is placed.</p></div></aside>
+<aside class="sheet sheet--search" role="dialog" aria-modal="true" aria-label="Search products" aria-hidden="true"><div class="sheet__hd"><span class="eyebrow mb0">Search Digini</span><button class="xbtn" type="button" data-close>Close</button></div><div class="sheet__pad"><label class="sr" for="q">Search products</label><input id="q" type="search" autocomplete="off" placeholder="Product, brand, or category" data-search-input data-autofocus /><p class="cap" data-search-count></p></div><div class="sheet__body" data-search-results></div></aside>
+<aside class="sheet sheet--account" role="dialog" aria-modal="true" aria-label="Account" aria-hidden="true"><div class="sheet__hd"><span class="eyebrow mb0">Account</span><button class="xbtn" type="button" data-close>Close</button></div><div class="sheet__body" data-account-body></div></aside>
+<div class="scrim"></div>`;
+
+function initSharedChrome() {
+  document.querySelectorAll(".rail").forEach((rail) => rail.remove());
+  document.querySelector(".page")?.classList.add("digini-page");
+
+  const header = document.querySelector("header.hdr,header.cohdr");
+  if (header) header.outerHTML = SHARED_HEADER_HTML;
+
+  const footer = document.querySelector("footer.ft");
+  if (footer) footer.outerHTML = SHARED_FOOTER_HTML;
+
+  if (!document.querySelector(".drawer")) {
+    document.body.insertAdjacentHTML("beforeend", SHARED_OVERLAYS_HTML);
+  }
+}
+
 /* ---------- Shared card ---------- */
 export function cardHTML(p) {
   return `<a class="pcard" href="product.html?id=${p.id}">
@@ -311,7 +353,7 @@ function fillNav() {
   }
 
   document.querySelectorAll("[data-collections]").forEach((ul) => {
-    ul.innerHTML = CAT.cats.slice(0, 8).map((c) =>
+    ul.innerHTML = CAT.cats.slice(0, 6).map((c) =>
       `<li><a href="shop.html?cat=${c.slug}">${esc(c.name)}</a></li>`).join("") +
       `<li><a href="shop.html"><b>View all categories</b></a></li>`;
   });
@@ -641,6 +683,7 @@ function initDeepLink() {
 
 /* ---------- Boot ---------- */
 document.addEventListener("DOMContentLoaded", async () => {
+  initSharedChrome();
   // First, so the warning is up before the catalogue resolves. Awaited: the
   // banner shifts the page, and shifting it after the reader has started is
   // worse than a few milliseconds of delay.
