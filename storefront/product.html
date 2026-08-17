@@ -80,7 +80,29 @@
       </header>
 
       <main id="main" tabindex="-1" class="section product-main">
-        <div class="wrap" id="pdp"><div class="pdp__loading" role="status">Loading product&hellip;</div></div>
+        <div class="wrap" id="pdp">
+          <div class="pdp pdp-skeleton" aria-hidden="true">
+            <div class="sk-product-gallery">
+              <div class="sk-thumb-stack"><i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i><i class="skeleton-block"></i></div>
+              <i class="skeleton-block sk-product-image"></i>
+            </div>
+            <div class="sk-product-info">
+              <i class="skeleton-block skeleton-line sk-line-xs"></i>
+              <i class="skeleton-block skeleton-line sk-line-title"></i>
+              <i class="skeleton-block skeleton-line sk-line-title sk-line-70"></i>
+              <i class="skeleton-block skeleton-line sk-line-sm"></i>
+              <i class="skeleton-block skeleton-line sk-line-price"></i>
+              <i class="skeleton-block skeleton-line sk-line-55"></i>
+              <i class="skeleton-block sk-rule"></i>
+              <i class="skeleton-block skeleton-line sk-line-xs"></i>
+              <div class="sk-swatches"><i class="skeleton-block"></i><i class="skeleton-block"></i></div>
+              <i class="skeleton-block skeleton-line sk-line-70"></i>
+              <i class="skeleton-block skeleton-line sk-line-55"></i>
+              <div class="sk-actions"><i class="skeleton-block"></i><i class="skeleton-block"></i></div>
+            </div>
+          </div>
+          <span class="sr" role="status">Loading product</span>
+        </div>
         <p class="wrap cap" data-catalog-error hidden style="color:var(--alert)"></p>
       </main>
 
