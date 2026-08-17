@@ -85,6 +85,58 @@ async function fillBrandCopy() {
   });
 }
 
+/* ---------- Theme picker ---------- */
+const DIGINI_THEMES = [
+  { id: "blue", label: "Ocean blue", swatch: "#005BD4" },
+  { id: "violet", label: "Electric violet", swatch: "#6D28D9" },
+  { id: "emerald", label: "Emerald green", swatch: "#047857" },
+  { id: "amber", label: "Warm amber", swatch: "#B45309" },
+  { id: "rose", label: "Modern rose", swatch: "#BE123C" },
+];
+
+function initThemePicker() {
+  const storageKey = "digini_theme_v1";
+  const themeIds = new Set(DIGINI_THEMES.map(({ id }) => id));
+  let activeTheme = "blue";
+
+  try {
+    const savedTheme = localStorage.getItem(storageKey);
+    if (themeIds.has(savedTheme)) activeTheme = savedTheme;
+  } catch {
+    // Storage can be unavailable in private or hardened browser contexts.
+  }
+
+  const applyTheme = (theme, persist = true) => {
+    const nextTheme = themeIds.has(theme) ? theme : "blue";
+    document.documentElement.dataset.theme = nextTheme;
+    document.querySelectorAll("[data-theme-option]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.themeOption === nextTheme));
+    });
+    if (persist) {
+      try { localStorage.setItem(storageKey, nextTheme); } catch { /* no-op */ }
+    }
+  };
+
+  document.querySelectorAll(".sdbar__in").forEach((bar) => {
+    if (bar.querySelector("[data-theme-picker]")) return;
+    const picker = document.createElement("span");
+    picker.className = "theme-picker";
+    picker.dataset.themePicker = "";
+    picker.setAttribute("role", "group");
+    picker.setAttribute("aria-label", "Choose theme color");
+    picker.innerHTML = DIGINI_THEMES.map(({ id, label, swatch }) =>
+      `<button class="theme-picker__option" type="button" data-theme-option="${id}" aria-label="${label}" aria-pressed="false" title="${label}" style="--swatch:${swatch}"></button>`
+    ).join("");
+    picker.addEventListener("click", (event) => {
+      const option = event.target.closest("[data-theme-option]");
+      if (option) applyTheme(option.dataset.themeOption);
+    });
+    bar.append(picker);
+  });
+
+  applyTheme(activeTheme, false);
+}
+
 /* ---------- Header, rail, drawers ---------- */
 function initHeader() {
   const hdr = document.querySelector(".hdr");
@@ -551,6 +603,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // banner shifts the page, and shifting it after the reader has started is
   // worse than a few milliseconds of delay.
   await initTemplateBanner();
+  initThemePicker();
   fillBrandCopy();
   initHeader();
   initRail();
