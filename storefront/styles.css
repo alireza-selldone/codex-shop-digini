@@ -259,7 +259,7 @@ h1,h2,h3{margin:0;font-weight:400;}
 .drawer{
   position:fixed;inset:0;z-index:80;background:var(--graphite);color:var(--dial);
   transform:translateX(100%);transition:transform var(--mid) var(--ease);
-  display:flex;flex-direction:column;padding:24px;overflow:auto;
+  display:flex;flex-direction:column;padding:18px 20px 22px;overflow:auto;
 }
 .drawer.is-open{transform:none;}
 /* Scroll containment: locking body alone is not enough when the scrolling
@@ -267,10 +267,10 @@ h1,h2,h3{margin:0;font-weight:400;}
    page behind it once the panel hits its own end. */
 html.is-locked,html.is-locked body{overflow:hidden;height:100%;}
 .drawer,.cart,.filters{overscroll-behavior:contain;}
-.drawer__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
-.drawer nav{display:flex;flex-direction:column;gap:26px;}
-.drawer nav a{font-family:var(--display);font-size:26px;min-height:var(--tap);display:flex;flex-direction:column;justify-content:center;}
-.drawer nav a small{display:block;font-family:var(--data);font-size:11px;color:var(--mist);margin-top:4px;}
+.drawer__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.drawer nav{display:flex;flex-direction:column;gap:3px;}
+.drawer nav a{min-height:58px;padding:6px 0;display:flex;flex-direction:column;justify-content:center;font-family:var(--body);font-size:18px;font-weight:500;line-height:1.15;letter-spacing:-.01em;}
+.drawer nav a small{display:block;margin-top:3px;font-family:var(--data);font-size:9.5px;font-weight:500;line-height:1.35;letter-spacing:.02em;color:var(--mist);}
 .xbtn{
   font-family:var(--data);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
   min-height:var(--tap);min-width:var(--tap);display:inline-flex;align-items:center;justify-content:center;
