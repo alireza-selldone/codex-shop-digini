@@ -565,7 +565,7 @@ html.is-locked,html.is-locked body{overflow:hidden;height:100%;}
 .thumb{aspect-ratio:1;background:var(--dial-pure);border:1px solid var(--rule);position:relative;}
 .thumb.is-on{border-color:var(--blued);}
 .thumb img{position:absolute;inset:8px;width:calc(100% - 16px);height:calc(100% - 16px);object-fit:contain;}
-.galmain{aspect-ratio:1;background:var(--dial-pure);position:relative;border:1px solid var(--rule);}
+.galmain{aspect-ratio:1;background:var(--dial-pure);position:relative;border:1px solid var(--rule);border-radius:12px;overflow:hidden;}
 .galmain img{position:absolute;left:6%;top:6%;width:88%;height:88%;object-fit:contain;}
 .pinfo{position:sticky;top:120px;}
 .pinfo h1{margin:8px 0 10px;}
