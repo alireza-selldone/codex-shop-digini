@@ -38,8 +38,6 @@ const PAGES = [
           </div>
         </section>
 
-        <div class="wrap"><div class="tickrule"></div></div>
-
         <section class="section">
           <div class="wrap">
             <nav class="chips" data-blog-cats aria-label="Filter by category"></nav>
@@ -71,8 +69,6 @@ const PAGES = [
               </div>
             </div>
           </section>
-
-          <div class="wrap"><div class="tickrule"></div></div>
 
           <section class="section">
             <div class="wrap">

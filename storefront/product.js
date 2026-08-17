@@ -155,7 +155,7 @@ async function initPDP(cat) {
       </div>
       <p class="cap" style="margin-top:14px">Demonstration storefront &mdash; no order is placed.</p>
 
-      <div style="margin-top:32px">
+      <div class="pinfo-accordions">
         <div class="acc is-open">
           <button class="acc__hd" type="button" aria-expanded="true">Description <span class="acc__ico">–</span></button>
           <div class="acc__bd">
