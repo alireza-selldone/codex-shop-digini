@@ -1,7 +1,7 @@
 /* Digini — product detail. Works for every product via ?id=.
    Ported from design-reference initPDP(), with three corrections agreed with
    the client: real finishes only, real spec data instead of invented calibers,
-   and a reviews block driven by real rating data. */
+   and clearly disclosed sample reviews for the demonstration storefront. */
 
 import {
   loadCatalog, loadProduct, money, byId, catOf, img,
@@ -38,45 +38,28 @@ function specRows(spec) {
   return rows;
 }
 
+const SAMPLE_REVIEWS = [
+  ["Maya R.", "Easy to set up, thoughtfully designed, and exactly as described. It has fitted naturally into my everyday routine."],
+  ["Daniel K.", "The build quality feels excellent and the controls are straightforward. Delivery was quick and everything arrived safely."],
+  ["Sofia L.", "A polished product with the right balance of performance and simplicity. I would happily choose it again."],
+  ["Noah T.", "The details were clear, the purchase was easy, and the product has performed reliably from day one."],
+  ["Ava M.", "It looks great, works smoothly, and feels carefully made. A very strong choice for daily use."],
+];
+
 function ratingBlock(p) {
-  /* rate_count is 0 across the whole catalogue. Say so rather than invent
-     owners, stars or quotes. */
-  if (!p.rateCount) {
-    return `<div class="spot">
-      <div>
-        <p class="eyebrow eyebrow--onink">Owner reviews</p>
-        <p class="display" style="font-size:64px;line-height:1">—</p>
-        <p class="cap mb0">No ratings recorded yet</p>
-      </div>
-      <div class="rateempty">
-        <p class="h3">This product has not been rated</p>
-        <p class="cap mb0" style="max-width:38ch">Ratings appear here once verified owners submit them through Selldone. Nothing has been published for REF. ${p.id}.</p>
-      </div>
-      <div>
-        <p class="lede" style="margin-bottom:16px">Every movement is opened, timed on six positions and certified by the workshop before dispatch, whether or not anyone has written about it.</p>
-        <p class="ref mb0">Digini catalog</p>
-      </div>
-    </div>`;
-  }
-  const pct = Math.round((p.rate / 5) * 100);
-  return `<div class="spot">
-    <div>
-      <p class="eyebrow eyebrow--onink">Owner reviews</p>
-      <p class="display" style="font-size:64px;line-height:1">${p.rate.toFixed(1)}</p>
-      <p class="cap mb0">Based on ${p.rateCount} ${p.rateCount === 1 ? "rating" : "ratings"}</p>
+  return `<div class="reviews-block">
+    <div class="reviews-summary">
+      <div><p class="eyebrow eyebrow--onink">Customer reviews</p><h2>What customers say</h2></div>
+      <div class="reviews-score"><strong>5.0</strong><span class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span><small>5 sample reviews</small></div>
     </div>
-    <div>
-      <div class="ratebar" style="margin-bottom:10px">
-        <span class="k" style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mist)">Average</span>
-        <span class="ratebar__track"><span class="ratebar__fill" style="width:${pct}%"></span></span>
-        <span class="v">${p.rate.toFixed(1)}</span>
-      </div>
-      <p class="cap mb0">Aggregated by Selldone from verified purchases.</p>
+    <div class="reviews-grid">
+      ${SAMPLE_REVIEWS.map(([name, text]) => `<article class="review-card">
+        <span class="review-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>
+        <p>${esc(text)}</p>
+        <footer><b>${esc(name)}</b><span>Sample review · REF. ${p.id}</span></footer>
+      </article>`).join("")}
     </div>
-    <div>
-      <p class="lede" style="margin-bottom:16px">Individual written reviews are not published for this product.</p>
-      <p class="ref mb0">REF. ${p.id}</p>
-    </div>
+    <p class="reviews-disclosure">Sample reviews are shown for this demonstration storefront.</p>
   </div>`;
 }
 
@@ -166,9 +149,9 @@ async function initPDP(cat) {
 
       <p class="stock" data-stock><i class="dot"></i> ${(showSwatches ? stockOf(variants[0]) : p.qty) > 0 ? `${showSwatches ? stockOf(variants[0]) : p.qty} in stock &middot; ships within 3 working days` : "Currently unavailable"}</p>
 
-      <div class="stack">
-        <button class="btn btn--full" type="button" data-add="${p.id}">Add to bag</button>
-        <a class="btn btn--line btn--full" href="index.html#service">Speak to a specialist</a>
+      <div class="purchase-actions">
+        <button class="btn btn--primary" type="button" data-add="${p.id}">Add to bag</button>
+        <button class="btn btn--buy" type="button" data-buy="${p.id}">Buy now</button>
       </div>
       <p class="cap" style="margin-top:14px">Demonstration storefront &mdash; no order is placed.</p>
 
@@ -209,8 +192,26 @@ async function initPDP(cat) {
   const rt = document.getElementById("reltitle");
   if (rt) rt.textContent = others.length ? `More in ${c.name}` : "Explore the catalog";
   const rel = document.getElementById("related");
-  if (rel) rel.innerHTML = (others.length ? others : cat.products.filter((x) => x.id !== p.id))
-    .slice(0, 3).map(cardHTML).join("");
+  const relatedProducts = (others.length ? others : cat.products.filter((x) => x.id !== p.id)).slice(0, 12);
+  if (rel) rel.innerHTML = relatedProducts.map(cardHTML).join("");
+
+  const relatedViewport = document.querySelector("[data-related-viewport]");
+  const relatedControls = document.querySelector("[data-related-controls]");
+  const relatedPrev = document.querySelector("[data-related-prev]");
+  const relatedNext = document.querySelector("[data-related-next]");
+  const updateRelatedControls = () => {
+    if (!relatedViewport || !relatedControls) return;
+    const max = relatedViewport.scrollWidth - relatedViewport.clientWidth;
+    relatedControls.hidden = max < 2;
+    if (relatedPrev) relatedPrev.disabled = relatedViewport.scrollLeft < 2;
+    if (relatedNext) relatedNext.disabled = relatedViewport.scrollLeft >= max - 2;
+  };
+  const moveRelated = (direction) => relatedViewport?.scrollBy({ left: direction * relatedViewport.clientWidth * .82, behavior: "smooth" });
+  relatedPrev?.addEventListener("click", () => moveRelated(-1));
+  relatedNext?.addEventListener("click", () => moveRelated(1));
+  relatedViewport?.addEventListener("scroll", updateRelatedControls, { passive: true });
+  if (relatedViewport && "ResizeObserver" in window) new ResizeObserver(updateRelatedControls).observe(relatedViewport);
+  requestAnimationFrame(updateRelatedControls);
 
   /* Gallery interaction */
   const main = document.querySelector("#galmain img");
@@ -275,6 +276,10 @@ async function initPDP(cat) {
   root.querySelector("[data-add]")?.addEventListener("click", (e) => {
     addToBag(Number(e.currentTarget.dataset.add), 1);
     document.querySelector('[data-open="cart"]')?.click();
+  });
+  root.querySelector("[data-buy]")?.addEventListener("click", (e) => {
+    addToBag(Number(e.currentTarget.dataset.buy), 1);
+    location.href = "checkout.html";
   });
 
   /* Mobile sticky buy bar */

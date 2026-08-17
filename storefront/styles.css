@@ -727,10 +727,8 @@ html.js-reveal .reveal.is-in{opacity:1;transform:none;}
    only the count badge needed a tabular figure so the column stays straight. */
 .check span.cap{font-family:var(--data);font-variant-numeric:tabular-nums;font-size:11.5px;}
 
-/* --- Ratings: honest empty state ------------------------------------------
-   Live rate_count is 0 across all 35 references. The reviews block keeps its
-   approved three-column layout and states that plainly rather than inventing
-   owner feedback.                                                            */
+/* --- Legacy live-rating components ----------------------------------------
+   Kept for stores that later switch the sample-review block to live ratings. */
 .rateempty{
   display:grid;place-items:center;text-align:center;
   border:1px solid var(--rule-dark);padding:36px 24px;
@@ -1562,6 +1560,12 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 .shop,.pdp,.checkout,.prose,.posts{position:relative;}
 .filters,.pinfo,.summary,.post,.article__body,.prose{border-radius:12px;}
 .filters,.pinfo,.summary{background:#fff;border:1px solid var(--rule);box-shadow:0 4px 20px rgba(16,24,40,.045);}
+.pinfo{padding:clamp(24px,2.5vw,36px);overflow:hidden;}
+.pinfo .h1{font-size:clamp(38px,4.2vw,64px);line-height:1.02;overflow-wrap:anywhere;}
+.purchase-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.purchase-actions .btn{width:100%;min-width:0;justify-content:center;text-align:center;}
+.btn--buy{background:var(--theme-accent);border-color:var(--theme-accent);color:#fff;}
+.btn--buy:hover{filter:brightness(.9);}
 .shop-main{padding-top:20px!important;}
 .shop .filters{padding:22px 24px;box-sizing:border-box;}
 .shop .listhd .h1{font-size:clamp(34px,3.2vw,48px);line-height:1.02;}
@@ -1571,12 +1575,44 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 .finput,.fselect,input[type="search"],input[type="email"]{border-radius:8px;}
 .sheet,.cart,.drawer{border-radius:16px 0 0 16px;}
 
+.reviews-section{padding:clamp(48px,6vw,76px) 0;}
+.reviews-summary{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:28px;}
+.reviews-summary h2{font-size:clamp(30px,4vw,48px);color:#fff;}
+.reviews-score{display:grid;grid-template-columns:auto auto;align-items:center;gap:3px 12px;text-align:right;}
+.reviews-score strong{grid-row:1/3;font:700 44px/1 var(--display);color:#fff;}
+.reviews-score small{color:var(--mist);font-size:11px;}
+.review-stars{color:#F6B51B;letter-spacing:.12em;font-size:14px;white-space:nowrap;}
+.reviews-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;}
+.review-card{min-height:220px;padding:22px;display:flex;flex-direction:column;border:1px solid var(--rule-dark);border-radius:12px;background:rgba(255,255,255,.035);}
+.review-card p{margin:18px 0 24px;color:var(--whisper);font-size:13.5px;line-height:1.6;}
+.review-card footer{margin-top:auto;display:flex;flex-direction:column;gap:4px;}
+.review-card footer b{color:#fff;font-size:13px;}
+.review-card footer span{color:var(--mist);font-size:10px;line-height:1.4;}
+.reviews-disclosure{margin:16px 0 0;color:var(--mist);font-size:11px;}
+
+.related-section{background:var(--dial);}
+.related-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:26px;}
+.related-heading .h2{font-size:clamp(30px,3.4vw,46px);}
+.related-controls{display:flex;gap:8px;}
+.related-controls button{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--rule);border-radius:50%;background:#fff;color:var(--graphite);font-size:20px;}
+.related-controls button:hover{border-color:var(--theme-primary);color:var(--theme-primary);}
+.related-controls button:disabled{opacity:.35;cursor:default;}
+.related-viewport{overflow:hidden;scroll-behavior:smooth;}
+.related-track{display:flex;gap:14px;}
+.related-track .pcard{flex:0 0 calc((100% - 56px)/5);padding:14px;}
+.related-track .pcard__art{margin-bottom:14px;}
+.related-track .pcard__name{font-size:13.5px;}
+.related-track .pcard .price{font-size:13px;}
+.related-track .eyebrow{font-size:8.5px;}
+
 @media (max-width:1120px){
   .digini-navrow .nav{gap:18px;}
   .digini-navrow .nav a{font-size:12px;}
   .digini-cats{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
   .promo-grid{grid-template-columns:1fr 1fr;}.promo-card--wide{grid-column:1/-1;}
   .guide-grid{grid-template-columns:repeat(2,1fr);}
+  .reviews-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .related-track .pcard{flex-basis:calc((100% - 42px)/4);}
 }
 @media (max-width:820px){
   .hdr__in{height:66px;grid-template-columns:auto auto 1fr auto;gap:12px;}
@@ -1589,6 +1625,8 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
   .benefit-bar__grid{grid-template-columns:1fr 1fr;}.benefit-bar__grid>div:nth-child(2){border-right:0;}.benefit-bar__grid>div:nth-child(-n+2){border-bottom:1px solid var(--rule);}
   .digini-cats{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
   .newsletter-band__inner{align-items:flex-start;flex-direction:column;}.newsletter-band .sub{width:100%;}
+  .reviews-grid{grid-template-columns:1fr 1fr;}
+  .related-track .pcard{flex-basis:calc((100% - 14px)/2);}
 }
 @media (max-width:620px){
   :root{--pad:16px;}
@@ -1609,5 +1647,11 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
   .digini-cats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
   .digini-cat{height:235px!important;}.digini-cat__copy{padding:10px 12px;}.digini-cat__copy b{font-size:14px;}
   .promo-grid,.guide-grid{grid-template-columns:1fr;}.promo-card--wide{grid-column:auto;}.promo-card{min-height:330px;}
+  .pinfo{padding:22px 18px;}
+  .pinfo .h1{font-size:36px;}
+  .reviews-summary{align-items:flex-start;flex-direction:column;}
+  .reviews-grid{grid-template-columns:1fr;}
+  .review-card{min-height:0;}
+  .related-track .pcard{flex-basis:84%;}
   .ft__cols{grid-template-columns:1fr 1fr;}.ft__col:first-child{grid-column:1/-1;}
 }
