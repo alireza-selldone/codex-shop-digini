@@ -45,25 +45,58 @@ function initShop(cat) {
   /* ---- Filter 2: price, logarithmic ----
      most references sit in the lower decade against a six-figure ceiling. On a
      linear track they occupy the first eighth and the control is unusable. */
-  const LO = cat.lo, HI = cat.hi;
-  const toVal = (pos) => Math.pow(10, lg(LO) + (Number(pos) / 100) * (lg(HI) - lg(LO)));
+  const LO = Math.max(cat.lo, 0.01), HI = Math.max(cat.hi, LO);
+  const span = lg(HI) - lg(LO);
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const toVal = (pos) => span === 0 ? LO : Math.pow(10, lg(LO) + (Number(pos) / 100) * span);
+  const toPos = (value) => span === 0 ? 0 : ((lg(clamp(value, LO, HI)) - lg(LO)) / span) * 100;
 
   const lo = document.getElementById("plo");
   const hi = document.getElementById("phi");
   const out = document.getElementById("pout");
+  const outLo = document.getElementById("poutlo");
+  const outHi = document.getElementById("pouthi");
+  const manualLo = document.getElementById("pmin");
+  const manualHi = document.getElementById("pmax");
+  const rangeBox = document.getElementById("price-range");
   const sort = document.getElementById("sort");
   const stock = document.getElementById("instock");
   const count = document.getElementById("count");
   const title = document.getElementById("listtitle");
   const intro = document.getElementById("listintro");
 
-  function render() {
+  [manualLo, manualHi].forEach((field) => {
+    field.min = String(Math.floor(LO));
+    field.max = String(Math.ceil(HI));
+  });
+
+  function paintPrice(syncFields = true) {
+    const a = toVal(lo.value), b = toVal(hi.value);
+    const minPrice = Math.floor(a), maxPrice = Math.ceil(b);
+    const minText = money(minPrice), maxText = money(maxPrice);
+    rangeBox.style.setProperty("--range-start", `${lo.value}%`);
+    rangeBox.style.setProperty("--range-end", `${hi.value}%`);
+    outLo.textContent = minText;
+    outHi.textContent = maxText;
+    out.textContent = `Price from ${minText} to ${maxText}`;
+    lo.setAttribute("aria-valuetext", minText);
+    hi.setAttribute("aria-valuetext", maxText);
+    lo.style.zIndex = Number(lo.value) > 88 ? "4" : "3";
+    hi.style.zIndex = Number(hi.value) < 12 ? "4" : "3";
+    if (syncFields) {
+      manualLo.value = String(minPrice);
+      manualHi.value = String(maxPrice);
+      manualLo.closest(".price-field")?.classList.remove("is-invalid");
+      manualHi.closest(".price-field")?.classList.remove("is-invalid");
+    }
+    return { a, b };
+  }
+
+  function render({ syncPriceFields = true } = {}) {
     const picked = [...catBox.querySelectorAll("input:checked")].map((i) => i.value);
     const brands = [...brandBox.querySelectorAll("input:checked")].map((i) => i.value);
-    let a = toVal(lo.value), b = toVal(hi.value);
-    if (a > b) [a, b] = [b, a];
+    const { a, b } = paintPrice(syncPriceFields);
     const atFloor = Number(lo.value) === 0, atCeil = Number(hi.value) === 100;
-    out.textContent = `${money(Math.floor(a))} — ${money(Math.ceil(b))}`;
 
     const list = cat.products.filter((p) =>
       (!picked.length || picked.includes(p.cat)) &&
@@ -112,7 +145,46 @@ function initShop(cat) {
   /* Any filter change resets paging: staying on page 3 of a set the reader just
      narrowed would hide results they had asked to see. */
   const reset = () => { shown = PAGE; render(); };
-  [lo, hi, sort, stock].forEach((el) => el.addEventListener("input", reset));
+  const onSliderInput = (event) => {
+    if (event.target === lo && Number(lo.value) > Number(hi.value)) lo.value = hi.value;
+    if (event.target === hi && Number(hi.value) < Number(lo.value)) hi.value = lo.value;
+    reset();
+  };
+  [lo, hi].forEach((el) => el.addEventListener("input", onSliderInput));
+  [sort, stock].forEach((el) => el.addEventListener("input", reset));
+
+  const applyManual = (field, slider, isMinimum, commit = false) => {
+    if (field.value.trim() === "") {
+      field.closest(".price-field")?.classList.toggle("is-invalid", !commit);
+      if (commit) paintPrice(true);
+      return;
+    }
+    let value = Number(field.value);
+    const other = toVal(isMinimum ? hi.value : lo.value);
+    const floor = isMinimum ? LO : other;
+    const ceiling = isMinimum ? other : HI;
+    const valid = Number.isFinite(value) && value >= floor && value <= ceiling;
+    field.closest(".price-field")?.classList.toggle("is-invalid", !valid);
+    if (!valid && !commit) return;
+    value = clamp(Number.isFinite(value) ? value : (isMinimum ? LO : HI), floor, ceiling);
+    slider.value = String(toPos(value));
+    shown = PAGE;
+    render({ syncPriceFields: commit });
+  };
+  manualLo.addEventListener("input", () => applyManual(manualLo, lo, true));
+  manualHi.addEventListener("input", () => applyManual(manualHi, hi, false));
+  manualLo.addEventListener("change", () => applyManual(manualLo, lo, true, true));
+  manualHi.addEventListener("change", () => applyManual(manualHi, hi, false, true));
+
+  rangeBox.addEventListener("click", (event) => {
+    if (event.target.closest(".dual-range__input")) return;
+    const rect = rangeBox.getBoundingClientRect();
+    const pos = clamp(((event.clientX - rect.left - 8) / Math.max(1, rect.width - 16)) * 100, 0, 100);
+    const slider = Math.abs(pos - Number(lo.value)) <= Math.abs(pos - Number(hi.value)) ? lo : hi;
+    slider.value = String(pos);
+    onSliderInput({ target: slider });
+    slider.focus();
+  });
   moreBtn.addEventListener("click", () => {
     const before = grid.querySelectorAll(".pcard").length;
     shown += PAGE;

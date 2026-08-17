@@ -98,15 +98,22 @@
 
               <div class="fgroup">
                 <h4 id="fg-price">Price</h4>
-                <p class="rangeout" id="pout" role="status">&nbsp;</p>
-                <!-- Logarithmic track: most references sit far below the ceiling
-                     against a $153,889 ceiling, so a linear slider buries them
-                     in the first eighth. -->
-                <label class="sr" for="plo">Minimum price</label>
-                <input class="range" id="plo" type="range" min="0" max="100" value="0" aria-describedby="pout">
-                <label class="sr" for="phi">Maximum price</label>
-                <input class="range" id="phi" type="range" min="0" max="100" value="100" aria-describedby="pout">
-                <p class="cap mb0" style="margin-top:10px">Logarithmic scale</p>
+                <div class="price-range-values" aria-hidden="true"><span id="poutlo">&nbsp;</span><span id="pouthi">&nbsp;</span></div>
+                <p class="sr" id="pout" role="status">Price range</p>
+                <!-- Both logarithmic controls share one visual track. The scale
+                     keeps everyday prices usable even when one premium product
+                     makes the catalogue ceiling unusually high. -->
+                <div class="dual-range" id="price-range" style="--range-start:0%;--range-end:100%">
+                  <span class="dual-range__track" aria-hidden="true"><i></i></span>
+                  <label class="sr" for="plo">Minimum price slider</label>
+                  <input class="dual-range__input" id="plo" type="range" min="0" max="100" value="0" step="0.1" aria-describedby="pout">
+                  <label class="sr" for="phi">Maximum price slider</label>
+                  <input class="dual-range__input" id="phi" type="range" min="0" max="100" value="100" step="0.1" aria-describedby="pout">
+                </div>
+                <div class="price-fields">
+                  <label class="price-field" for="pmin"><span>Min price</span><b><i aria-hidden="true">$</i><input id="pmin" type="number" inputmode="numeric" step="1" aria-describedby="pout"></b></label>
+                  <label class="price-field" for="pmax"><span>Max price</span><b><i aria-hidden="true">$</i><input id="pmax" type="number" inputmode="numeric" step="1" aria-describedby="pout"></b></label>
+                </div>
               </div>
 
               <div class="fgroup">
