@@ -64,6 +64,7 @@ function initShop(cat) {
   const count = document.getElementById("count");
   const title = document.getElementById("listtitle");
   const intro = document.getElementById("listintro");
+  const crumbTitle = document.getElementById("crumbtitle");
 
   [manualLo, manualHi].forEach((field) => {
     field.min = String(Math.floor(LO));
@@ -111,6 +112,7 @@ function initShop(cat) {
 
     const one = picked.length === 1 ? catOf(cat, picked[0]) : null;
     title.textContent = one ? one.name : "All products";
+    if (crumbTitle) crumbTitle.textContent = one ? one.name : "Products";
     if (intro) intro.textContent = one ? one.blurb
       : `${cat.products.length} products across ${cat.cats.length} categories.`;
     count.textContent = `${list.length} ${list.length === 1 ? "product" : "products"}`;

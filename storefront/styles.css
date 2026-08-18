@@ -1671,7 +1671,6 @@ h1,h2,h3,.h1,.h2,.h3,.h-hero{font-family:var(--display);font-weight:700;letter-s
 .reviews-disclosure{margin:16px 0 0;color:var(--mist);font-size:11px;}
 
 .home-reviews{position:relative;overflow:hidden;padding:clamp(64px,7vw,92px) 0;background:var(--theme-deep);color:#fff;}
-.home-reviews::before{content:"";position:absolute;width:520px;height:520px;right:-180px;top:-260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),rgba(255,255,255,0) 68%);pointer-events:none;}
 .home-reviews .wrap{position:relative;z-index:1;}
 .home-reviews__header{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:clamp(32px,6vw,88px);align-items:end;margin-bottom:34px;}
 .home-reviews__intro h2{max-width:720px;margin:10px 0 16px;font-size:clamp(36px,4.5vw,60px);line-height:1.02;color:#fff;}

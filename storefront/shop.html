@@ -81,7 +81,7 @@
 
       <main id="main" tabindex="-1" class="section shop-main">
         <div class="wrap">
-          <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Products</p>
+          <p class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <span id="crumbtitle">Products</span></p>
 
           <div class="shop">
 
@@ -137,6 +137,24 @@
                   <h1 class="h1" id="listtitle">All products</h1>
                   <p class="lede" id="listintro" style="margin:8px 0 4px">&nbsp;</p>
                   <p class="cap mb0" id="count" role="status">&nbsp;</p>
+                  <script>
+                    (() => {
+                      const labels = {
+                        "tv": "TVs", "digital-camera": "Digital Cameras", "power-bank": "Power Banks",
+                        "ear-buds": "Earbuds", "flash-drive": "Flash Drives", "hard-drive": "Hard Drives",
+                        "rv": "RV Power Stations", "laptop": "Laptop", "printers": "Printers",
+                        "keyboard": "Keyboards", "mice": "Mice", "action-cameras": "Action Cameras",
+                        "monitors": "Monitors", "microphones": "Microphones", "headphones": "Headphones"
+                      };
+                      const slug = new URLSearchParams(location.search).get("cat");
+                      const name = labels[slug];
+                      if (!name) return;
+                      document.getElementById("listtitle").textContent = name;
+                      document.getElementById("listintro").textContent = `Loading ${name.toLowerCase()}…`;
+                      document.getElementById("crumbtitle").textContent = name;
+                      document.title = `${name} — Digini`;
+                    })();
+                  </script>
                 </div>
                 <div class="list-controls">
                   <button class="fbar mobonly" type="button" data-open="filters">Filters</button>
